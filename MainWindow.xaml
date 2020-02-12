@@ -8,8 +8,8 @@
     xmlns:ui="http://schemas.modernwpf.com/2019"
     x:Name="Window"
     Title="TaBEA 3.0.0"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="600"
     ui:TitleBar.ExtendViewIntoTitleBar="True"
     ui:WindowHelper.UseModernWindowStyle="True"
     mc:Ignorable="d">
@@ -148,7 +148,7 @@
                 MinWidth="180"
                 Background="#F3F3F3"
                 BorderThickness="0">
-                <TreeViewItem Header="Root">
+                <TreeViewItem Header="Root" IsExpanded="True">
                     <TreeViewItem Header="Child1" />
                     <TreeViewItem Header="Child2" />
                     <TreeViewItem Header="Child3" />
