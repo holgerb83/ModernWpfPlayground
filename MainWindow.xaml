@@ -16,13 +16,12 @@
     <Window.Resources>
         <local:PixelsToGridLengthConverter x:Key="PixelsToGridLength" />
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <Grid x:Name="AppTitleBar" Height="{Binding ElementName=Window, Path=(ui:TitleBar.Height)}">
+    <DockPanel>
+        <!--  TitleBar  -->
+        <Grid
+            Height="{Binding ElementName=Window, Path=(ui:TitleBar.Height)}"
+            Background="#DDDDDD"
+            DockPanel.Dock="Top">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="TextElement.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
@@ -74,12 +73,6 @@
                     <MenuItem Header="Info" />
                 </MenuItem>
             </Menu>
-            <!--<ui:TitleBarButton
-                x:Name="ForwardButton"
-                Grid.Column="1"
-                Content="&#xEA47;"
-                Style="{StaticResource AppTitleBarBackButtonStyle}" />-->
-
             <!--  Horizontally centered title  -->
             <TextBlock
                 Grid.Column="0"
@@ -88,9 +81,117 @@
                 VerticalAlignment="Center"
                 FontSize="13"
                 Text="{Binding ElementName=Window, Path=Title}" />
-
         </Grid>
+        <!--  Footer  -->
+        <Grid
+            Height="24"
+            Background="DarkGreen"
+            DockPanel.Dock="Bottom">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Margin" Value="10,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Holger Börchers" />
+            <TextBlock Grid.Column="1" Text="|" />
+            <TextBlock Grid.Column="2" Text="SQL-SRV\SQLEXPRESS" />
+            <TextBlock
+                Grid.Column="3"
+                HorizontalAlignment="Right"
+                Text="BlaBlaBla" />
+        </Grid>
+        <!--  Content  -->
+        <Grid Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Background="#2C2C2C"
+                BorderThickness="0">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock
+                        Margin="0,10"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="#F4F4F4"
+                        Text="Dummy active">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="270" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,10"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="#808080"
+                        Text="Dummy inactive">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="270" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            <TreeView
+                Grid.Column="1"
+                MinWidth="180"
+                Background="#F3F3F3"
+                BorderThickness="0">
+                <TreeViewItem Header="Root">
+                    <TreeViewItem Header="Child1" />
+                    <TreeViewItem Header="Child2" />
+                    <TreeViewItem Header="Child3" />
+                </TreeViewItem>
+            </TreeView>
+            <GridSplitter
+                Grid.Column="2"
+                Width="4"
+                Background="Transparent" />
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button HorizontalAlignment="Stretch" Content="New" />
+                    <Button HorizontalAlignment="Stretch" Content="Open" />
+                    <Separator />
+                    <Button HorizontalAlignment="Stretch" Content="Open catalog" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.ColumnSpan="2">
+                    <TextBlock Margin="0,10" FontSize="16">
+                        <Run FontWeight="Bold" Text="T" /><Run Text="ower" />
+                        <Run FontWeight="Bold" Text="a" /><Run Text="nd" />
+                        <Run FontWeight="Bold" Text="B" /><Run Text="asement" />
+                        <Run FontWeight="Bold" Text="E" /><Run Text="ngineering" />
+                        <Run FontWeight="Bold" Text="A" /><Run Text="pplication" />
+                    </TextBlock>
+                    <TabControl>
+                        <TabItem Header="Bolt" />
+                        <TabItem Header="General" />
+                    </TabControl>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>
 
-    </Grid>
 </Window>
 
