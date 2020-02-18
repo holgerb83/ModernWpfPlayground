@@ -22,6 +22,21 @@
     <Window.Resources>
         <local:PixelsToGridLengthConverter x:Key="PixelsToGridLength" />
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding
+            Key="O"
+            Command="{Binding OpenViewModelCommand}"
+            Modifiers="Control" />
+        <KeyBinding
+            Key="S"
+            Command="{Binding SaveViewModelCommand}"
+            Modifiers="Control" />
+        <KeyBinding
+            Key="N"
+            Command="{Binding ResetViewModelCommand}"
+            Modifiers="Control" />
+    </Window.InputBindings>
+
     <DockPanel>
         <!--  TitleBar  -->
         <Grid
@@ -63,8 +78,18 @@
                     </Style>
                 </Menu.Resources>
                 <MenuItem Header="File">
-                    <MenuItem Header="New" />
-                    <MenuItem Header="Open" />
+                    <MenuItem
+                        Command="{Binding ResetViewModelCommand}"
+                        Header="New"
+                        InputGestureText="Ctrl+N" />
+                    <MenuItem
+                        Command="{Binding OpenViewModelCommand}"
+                        Header="Open"
+                        InputGestureText="Ctrl+O" />
+                    <MenuItem
+                        Command="{Binding SaveViewModelCommand}"
+                        Header="Save"
+                        InputGestureText="Ctrl+S" />
                     <Separator />
                     <MenuItem Command="{Binding CloseCommand}" Header="Close" />
                 </MenuItem>
@@ -172,14 +197,18 @@
                             Margin="5"
                             Orientation="Vertical"
                             Spacing="5">
-                            <Button HorizontalAlignment="Stretch" Content="New" />
-                            <Button HorizontalAlignment="Stretch" Content="Open" />
-                            <Separator />
-                            <Button HorizontalAlignment="Stretch" Content="Open catalog" />
+                            <Button
+                                HorizontalAlignment="Stretch"
+                                Command="{Binding OpenViewModelCommand}"
+                                Content="Open" />
+                            <Button
+                                HorizontalAlignment="Stretch"
+                                Command="{Binding SaveViewModelCommand}"
+                                Content="Save" />
                         </ui:SimpleStackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="General">
+                <TabItem Header="General" IsSelected="True">
                     <ui:SimpleStackPanel Margin="5" Spacing="10">
                         <controls:PropertyPresenter2
                             Command="{Binding ShowDialogCommand}"

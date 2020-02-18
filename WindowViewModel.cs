@@ -10,6 +10,9 @@ namespace ModernWpfPlayground
         {
             ShowDialogCommand = new RelayCommand(async x => await ShowDialogAsync());
             CloseCommand = new RelayCommand(x => Application.Current.Shutdown());
+            OpenViewModelCommand = new RelayCommand(x => LoadViewModel());
+            SaveViewModelCommand = new RelayCommand(x => SaveViewModel());
+            ResetViewModelCommand = new RelayCommand(x => ResetViewModel());
         }
 
         private async Task ShowDialogAsync()
@@ -52,5 +55,11 @@ namespace ModernWpfPlayground
         }
 
         public ICommand CloseCommand { get; }
+
+        public ICommand OpenViewModelCommand { get; }
+
+        public ICommand SaveViewModelCommand { get; }
+
+        public ICommand ResetViewModelCommand { get; }
     }
 }
