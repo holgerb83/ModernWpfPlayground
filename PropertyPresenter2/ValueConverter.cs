@@ -11,7 +11,7 @@ using Brushes = System.Windows.Media.Brushes;
 using FontFamily = System.Windows.Media.FontFamily;
 using Point = System.Windows.Point;
 
-namespace LsBricks.Controls
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <summary>
     /// Makes an Bitmap from every Imageformat.
@@ -95,30 +95,6 @@ namespace LsBricks.Controls
             value is bool b ? !b : throw new InvalidOperationException("The target must be a boolean");
 
         /// <inheritdoc />
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
-    }
-
-    /// <summary>
-    /// negate double converter
-    /// </summary>
-    [ValueConversion(typeof(double), typeof(double))]
-    public class NegateDoubleConverter : IValueConverter
-    {
-        /// <summary>Converts a value. </summary>
-        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
-        /// <param name="value">The value produced by the binding source.</param>
-        /// <param name="targetType">The type of the binding target property.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-            value is double d ? -d : throw new ArgumentException(nameof(value) + " is not a doubles");
-
-        /// <summary>Converts a value. </summary>
-        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
     }
 }

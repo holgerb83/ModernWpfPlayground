@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LsBricks.Controls
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <summary>
     /// Selects the right template on base of value-type.

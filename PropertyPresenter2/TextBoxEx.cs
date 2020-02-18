@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace LsBricks.Controls
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <inheritdoc />
     /// <summary>
@@ -38,7 +38,7 @@ namespace LsBricks.Controls
 
         /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:LsBricks.Controls.TextBoxEx" /> class.
+        /// Initializes a new instance of the <see cref="T:ModernWpfPlayground.PropertyPresenter2.TextBoxEx" /> class.
         /// </summary>
         public TextBoxEx()
         {

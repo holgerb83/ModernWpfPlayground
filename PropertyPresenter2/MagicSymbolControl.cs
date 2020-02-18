@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace LsBricks.Controls
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <summary>
     /// Interaction logic for <see cref="MagicSymbolControl"/>

@@ -2,11 +2,11 @@
     x:Class="ModernWpfPlayground.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:LsBricks.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
     x:Name="Window"
     Title="TaBEA 3.0.0"
     Width="1200"
@@ -210,17 +210,17 @@
                 </TabItem>
                 <TabItem Header="General" IsSelected="True">
                     <ui:SimpleStackPanel Margin="5" Spacing="10">
-                        <controls:PropertyPresenter2
+                        <propertyPresenter2:PropertyPresenter2
                             Command="{Binding ShowDialogCommand}"
                             Label="Hello"
                             Symbol="x³"
                             Value="{Binding WelcomeMessage}" />
-                        <controls:PropertyPresenter2
+                        <propertyPresenter2:PropertyPresenter2
                             Label="Hallo"
                             Symbol="x²"
                             Value="{Binding ValidationTest}" />
-                        <controls:PropertyPresenter2 Label="Hello" Value="{Binding BooleanValue}" />
-                        <controls:PropertyPresenter2 Label="Hello">
+                        <propertyPresenter2:PropertyPresenter2 Label="Hello" Value="{Binding BooleanValue}" />
+                        <propertyPresenter2:PropertyPresenter2 Label="Hello">
                             <Slider
                                 AutoToolTipPlacement="TopLeft"
                                 Interval="1"
@@ -230,13 +230,13 @@
                                 TickFrequency="10"
                                 TickPlacement="BottomRight"
                                 Value="{Binding SliderTest}" />
-                        </controls:PropertyPresenter2>
+                        </propertyPresenter2:PropertyPresenter2>
                         <ui:ProgressRing
                             Width="{Binding SliderTest}"
                             Height="{Binding SliderTest}"
                             IsActive="{Binding BooleanValue}"
                             Visibility="{Binding VisibilityEnumTest}" />
-                        <controls:PropertyPresenter2 Label="Visi" Value="{Binding VisibilityEnumTest}" />
+                        <propertyPresenter2:PropertyPresenter2 Label="Visi" Value="{Binding VisibilityEnumTest}" />
                     </ui:SimpleStackPanel>
                 </TabItem>
             </TabControl>

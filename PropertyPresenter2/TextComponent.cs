@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace LsBricks.ElementMVVM.Types
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <summary>
     /// A component of the symbol

@@ -1,5 +1,4 @@
-﻿using LsBricks.ElementMVVM.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -9,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace LsBricks.Controls
+namespace ModernWpfPlayground.PropertyPresenter2
 {
     /// <summary>
     ///     Magically converts a text to 

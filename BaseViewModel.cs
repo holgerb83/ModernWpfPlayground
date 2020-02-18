@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows;
 using Microsoft.Win32;
-using ModernWpfPlayground.Annotations;
 
 namespace ModernWpfPlayground
 {
