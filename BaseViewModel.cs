@@ -44,7 +44,7 @@ namespace ModernWpfPlayground
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void SaveViewModel()
+        protected void SaveViewModel()
         {
             var contents = JsonSerializer.Serialize(_valueDict);
             var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.json"};
@@ -55,7 +55,7 @@ namespace ModernWpfPlayground
             }
         }
 
-        public void ResetViewModel()
+        protected void ResetViewModel()
         {
             foreach (var key in _valueDict.Keys)
             {
@@ -64,7 +64,7 @@ namespace ModernWpfPlayground
             }
         }
 
-        public void LoadViewModel()
+        protected void LoadViewModel()
         {
             var openFileDialog = new OpenFileDialog {AddExtension = true, DefaultExt = "*.json"};
             var result = openFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
