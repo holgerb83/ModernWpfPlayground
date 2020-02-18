@@ -1,0 +1,17 @@
+﻿<ui:ContentDialog
+    x:Class="ModernWpfPlayground.ContentDialogExample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="Save your work?"
+    CloseButtonText="Cancel"
+    DefaultButton="Close"
+    IsShadowEnabled="True"
+    PrimaryButtonText="Yes"
+    SecondaryButtonText="No">
+    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <!--  Content body  -->
+        <TextBlock Text="Lorem ipsum dolor sit amet, adipisicing elit." TextWrapping="Wrap" />
+        <CheckBox Content="Upload your content to the cloud." />
+    </StackPanel>
+</ui:ContentDialog>
