@@ -8,13 +8,15 @@ namespace ModernWpfPlayground
     {
         public WindowViewModel()
         {
-            ShowDialogCommand = new RelayCommand(async x => await ShowDialogAsync(x));
+            ShowDialogCommand = new RelayCommand(async x => await ShowDialogAsync());
+            CloseCommand = new RelayCommand(x => Application.Current.Shutdown());
         }
 
-        private async Task ShowDialogAsync(object obj)
+        private async Task ShowDialogAsync()
         {
-            var dialog = new ContentDialogExample();
-            await dialog.ShowAsync();
+            var dialog = new ContentDialogExample {Message = WelcomeMessage};
+            var result = await dialog.ShowAsync();
+            WelcomeMessage = result.ToString();
         }
 
         public bool BooleanValue
@@ -41,6 +43,14 @@ namespace ModernWpfPlayground
             set => SetProperty(value);
         }
 
-        public ICommand ShowDialogCommand { get; }
+        public RelayCommand ShowDialogCommand { get; }
+
+        public string WelcomeMessage
+        {
+            get => GetProperty("Shadow of the empire");
+            set => SetProperty(value);
+        }
+
+        public ICommand CloseCommand { get; }
     }
 }

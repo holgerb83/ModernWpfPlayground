@@ -25,10 +25,7 @@ namespace ModernWpfPlayground
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute?.Invoke(parameter) ?? true;
-        }
+        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
 
         public void Execute(object parameter)
         {
