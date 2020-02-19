@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace ModernWpfPlayground
+namespace ModernWpfPlayground.MvvmStuff
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {

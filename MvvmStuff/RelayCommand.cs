@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ModernWpfPlayground
+namespace ModernWpfPlayground.MvvmStuff
 {
     public class RelayCommand : ICommand
     {
