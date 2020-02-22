@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
     x:Name="Window"
     Title="TaBEA 3.0.0"
     Width="1200"
@@ -91,7 +91,10 @@
                         Header="Save"
                         InputGestureText="Ctrl+S" />
                     <Separator />
-                    <MenuItem Command="{Binding CloseCommand}" Header="Close" />
+                    <MenuItem
+                        Command="{Binding CloseCommand}"
+                        Header="Close"
+                        InputGestureText="Alt+F4" />
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <MenuItem Header="Copy" />
