@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows;
@@ -12,34 +11,34 @@ namespace ModernWpfPlayground.MvvmStuff
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        protected BaseViewModel()
-        {
-            _properties = GetType().GetProperties();
-        }
 
         private readonly Dictionary<string, object> _valueDict = new Dictionary<string, object>();
-        private readonly PropertyInfo[] _properties;
 
-        protected bool SetProperty<T>(T value, [CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(T value, Action<T>? onChanged = null,
+            [CallerMemberName] string? propertyName = null)
         {
+            if(propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (_valueDict.TryGetValue(propertyName, out var obj) && Equals(value, obj)) return false;
 
-            _valueDict[propertyName] = value;
+            _valueDict[propertyName] = value!;
             OnPropertyChanged(propertyName);
+            onChanged?.Invoke(value);
             return true;
         }
 
-        protected T GetProperty<T>(T defaultValue = default, [CallerMemberName] string propertyName = null)
+        protected T GetProperty<T>(T defaultValue = default, [CallerMemberName] string? propertyName = null)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             return _valueDict.TryGetValue(propertyName, out var obj) ? (T) obj : defaultValue;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         [PublicAPI]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
+            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -63,50 +62,14 @@ namespace ModernWpfPlayground.MvvmStuff
             }
         }
 
-        protected void LoadViewModel()
+        protected void MapDictionary(IEnumerable<(string, object?)> tuples)
         {
-            var openFileDialog = new OpenFileDialog {AddExtension = true, DefaultExt = "*.json"};
-            var result = openFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
-            if (result != true) return;
-            var contents = File.ReadAllText(openFileDialog.FileName);
-            var obj = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(contents);
-            foreach (var (key, value) in obj)
+            if (tuples == null) throw new ArgumentNullException(nameof(tuples));
+            foreach (var (key, value) in tuples)
             {
-                _valueDict[key] = CastToType(key, value);
+                _valueDict[key] = value!;
                 OnPropertyChanged(key);
             }
-        }
-
-        private object CastToType(string key, JsonElement value)
-        {
-
-            var property = Array.Find(_properties, x => x.Name == key);
-            if (property.PropertyType == typeof(double))
-            {
-                return value.GetDouble();
-            }
-
-            if (property.PropertyType == typeof(bool))
-            {
-                return value.GetBoolean();
-            }
-
-            if (property.PropertyType == typeof(int))
-            {
-                return value.GetInt32();
-            }
-
-            if (property.PropertyType.IsEnum)
-            {
-                return Enum.ToObject(property.PropertyType, value.GetInt32());
-            }
-
-            if (property.PropertyType == typeof(string))
-            {
-                return value.GetString();
-            }
-
-            return default;
         }
     }
 }

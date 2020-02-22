@@ -16,7 +16,7 @@ namespace ModernWpfPlayground.PropertyPresenter2
     /// <summary>
     /// Makes an Bitmap from every Imageformat.
     /// </summary>
-    public class ObjectImageConverter : IValueConverter
+    public sealed class ObjectImageConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
