@@ -8,7 +8,7 @@
     xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     x:Name="Window"
-    Title="TaBEA 3.0.0"
+    Title="{Binding Title}"
     Width="1200"
     Height="600"
     ui:TitleBar.ExtendViewIntoTitleBar="True"

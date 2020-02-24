@@ -11,16 +11,17 @@ namespace ModernWpfPlayground.MvvmStuff
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
 
-        private readonly Dictionary<string, object> _valueDict = new Dictionary<string, object>();
+        public IReadOnlyDictionary<string, object> Values => _values;
 
         protected bool SetProperty<T>(T value, Action<T>? onChanged = null,
             [CallerMemberName] string? propertyName = null)
         {
             if(propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-            if (_valueDict.TryGetValue(propertyName, out var obj) && Equals(value, obj)) return false;
+            if (_values.TryGetValue(propertyName, out var obj) && Equals(value, obj)) return false;
 
-            _valueDict[propertyName] = value!;
+            _values[propertyName] = value!;
             OnPropertyChanged(propertyName);
             onChanged?.Invoke(value);
             return true;
@@ -29,7 +30,7 @@ namespace ModernWpfPlayground.MvvmStuff
         protected T GetProperty<T>(T defaultValue = default, [CallerMemberName] string? propertyName = null)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-            return _valueDict.TryGetValue(propertyName, out var obj) ? (T) obj : defaultValue;
+            return Values.TryGetValue(propertyName, out var obj) ? (T) obj : defaultValue;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -42,32 +43,22 @@ namespace ModernWpfPlayground.MvvmStuff
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void SaveViewModel()
-        {
-            var contents = JsonSerializer.Serialize(_valueDict);
-            var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.json"};
-            var result = saveFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
-            if (result == true)
-            {
-                File.WriteAllText(saveFileDialog.FileName, contents);
-            }
-        }
-
         protected void ResetViewModel()
         {
-            foreach (var key in _valueDict.Keys)
+            foreach (var key in Values.Keys)
             {
-                _valueDict.Remove(key);
+                _values.Remove(key);
                 OnPropertyChanged(key);
             }
         }
 
-        protected void MapDictionary(IEnumerable<(string, object?)> tuples)
+        protected abstract IEnumerable<(string key, object? value)> GetViewModelItems();
+
+        protected void LoadViewModel()
         {
-            if (tuples == null) throw new ArgumentNullException(nameof(tuples));
-            foreach (var (key, value) in tuples)
+            foreach (var (key, value) in GetViewModelItems())
             {
-                _valueDict[key] = value!;
+                _values[key] = value!;
                 OnPropertyChanged(key);
             }
         }
