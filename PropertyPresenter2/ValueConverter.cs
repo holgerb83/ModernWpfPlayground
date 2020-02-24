@@ -29,7 +29,7 @@ namespace ModernWpfPlayground.PropertyPresenter2
             if (!(value is string strValue)) return Binding.DoNothing;
             if (strValue.StartsWith(dynResPrefix, StringComparison.Ordinal))
             {
-                var resource = Application.Current.TryFindResource(strValue.Replace(dynResPrefix, string.Empty));
+                var resource = Application.Current.TryFindResource(strValue.Replace(dynResPrefix, string.Empty , StringComparison.InvariantCulture));
                 return resource is ImageSource source ? source : Binding.DoNothing;
             }
 

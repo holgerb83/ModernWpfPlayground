@@ -58,6 +58,7 @@
                 <ColumnDefinition Width="{Binding ElementName=Window, Path=(ui:TitleBar.SystemOverlayLeftInset), Converter={StaticResource PixelsToGridLength}}" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Menu
                 Grid.Column="1"
@@ -110,11 +111,18 @@
             <!--  Horizontally centered title  -->
             <TextBlock
                 Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="4"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="13"
                 Text="{Binding ElementName=Window, Path=Title}" />
+            <ui:PersonPicture
+                Grid.Column="3"
+                Height="24"
+                Margin="0,0,150,0"
+                DisplayName="Holger Börchers"
+                ToolTip="Holger Börchers"
+                WindowChrome.IsHitTestVisibleInChrome="True" />
         </Grid>
         <!--  Footer  -->
         <Grid
