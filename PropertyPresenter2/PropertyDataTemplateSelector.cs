@@ -12,20 +12,20 @@ namespace ModernWpfPlayground.PropertyPresenter2
         /// <summary>
         /// Default data template. (currently Textbox)
         /// </summary>
-        public DataTemplate DefaultDataTemplate { private get; set; }
+        public DataTemplate? DefaultDataTemplate { private get; set; }
 
         /// <summary>
         /// Data template for boolean. (currently Checkbox)
         /// </summary>
-        public DataTemplate BooleanDataTemplate { private get; set; }
+        public DataTemplate? BooleanDataTemplate { private get; set; }
 
         /// <summary>
         /// Data template for enums. (currently Combobox)
         /// </summary>
-        public DataTemplate EnumComboBoxDataTemplate { private get; set; }
+        public DataTemplate? EnumComboBoxDataTemplate { private get; set; }
 
         /// <inheritdoc />
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             return item switch
             {

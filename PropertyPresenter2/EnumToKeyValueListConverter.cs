@@ -22,15 +22,16 @@ namespace ModernWpfPlayground.PropertyPresenter2
         /// <summary>
         /// Returns the content of a description attribute of an enum.
         /// </summary>
-        /// <param name="enumValue"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        private static string GetDescription(object enumValue)
+        private static string GetDescription(object value)
         {
+            if (!(value is Enum enumValue)) return string.Empty;
             var descriptionAttribute = enumValue.GetType()
               .GetField(enumValue.ToString()).GetCustomAttributes(false)
               .OfType<DescriptionAttribute>().FirstOrDefault();
 
-            return descriptionAttribute?.Description ?? enumValue.ToString();
+            return descriptionAttribute?.Description ?? value.ToString();
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

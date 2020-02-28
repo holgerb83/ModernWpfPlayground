@@ -8,7 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <local:IntellisenseResources Source="/ModernWpf;component/DesignTime/DesignTimeResources.xaml" />
+                <local:IntellisenseResourceDictionary Source="/ModernWpf;component/DesignTime/DesignTimeResources.xaml" />
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>

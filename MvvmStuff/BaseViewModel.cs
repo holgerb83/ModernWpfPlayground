@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Windows;
-using Microsoft.Win32;
 
 namespace ModernWpfPlayground.MvvmStuff
 {
@@ -13,7 +9,7 @@ namespace ModernWpfPlayground.MvvmStuff
     {
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
 
-        public IReadOnlyDictionary<string, object> Values => _values;
+        protected IReadOnlyDictionary<string, object> Values => _values;
 
         protected bool SetProperty<T>(T value, Action<T>? onChanged = null,
             [CallerMemberName] string? propertyName = null)
@@ -35,8 +31,6 @@ namespace ModernWpfPlayground.MvvmStuff
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        [PublicAPI]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
