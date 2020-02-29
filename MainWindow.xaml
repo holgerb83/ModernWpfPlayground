@@ -227,9 +227,14 @@
                             Symbol="x³"
                             Value="{Binding WelcomeMessage}" />
                         <propertyPresenter2:PropertyPresenter2
+                            IsReadOnly="True"
                             Label="Hallo"
                             Symbol="x²"
-                            Value="{Binding ValidationTest}" />
+                            Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                        <propertyPresenter2:PropertyPresenter2
+                            Label="Good bye"
+                            Symbol="x²"
+                            Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
                         <propertyPresenter2:PropertyPresenter2 Label="Hello" Value="{Binding BooleanValue}" />
                         <propertyPresenter2:PropertyPresenter2 Label="Hello">
                             <Slider
@@ -248,6 +253,7 @@
                             IsActive="{Binding BooleanValue}"
                             Visibility="{Binding VisibilityEnumTest}" />
                         <propertyPresenter2:PropertyPresenter2 Label="Visi" Value="{Binding VisibilityEnumTest}" />
+                        <TextBox Text="Dummy" />
                     </ui:SimpleStackPanel>
                 </TabItem>
             </TabControl>
