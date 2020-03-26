@@ -28,10 +28,10 @@ namespace ModernWpfPlayground.PropertyPresenter2
         {
             if (!(value is Enum enumValue)) return string.Empty;
             var descriptionAttribute = enumValue.GetType()
-              .GetField(enumValue.ToString()).GetCustomAttributes(false)
+              .GetField(enumValue.ToString())?.GetCustomAttributes(false)
               .OfType<DescriptionAttribute>().FirstOrDefault();
 
-            return descriptionAttribute?.Description ?? value.ToString();
+            return descriptionAttribute?.Description ?? value.ToString() ?? string.Empty;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ModernWpfPlayground"
-    xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     StartupUri="MainWindow.xaml">
     <Application.Resources>

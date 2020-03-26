@@ -51,7 +51,7 @@ namespace ModernWpfPlayground.PropertyPresenter2
         /// <param name="geometry">geometry</param>
         /// <param name="brush">color of the icon</param>
         /// <returns></returns>
-        public static ImageSource GetIcon(Geometry geometry, Brush brush)
+        public static ImageSource GetIcon(Geometry geometry, Brush? brush)
         {
             if (brush == null)
                 brush = Brushes.Black;
@@ -77,7 +77,7 @@ namespace ModernWpfPlayground.PropertyPresenter2
                     FontStyles.Normal,
                     FontWeights.Normal,
                     FontStretches.Normal),
-                64, brush);
+                64, brush, 1.5);
 
             var geometry = formattedText.BuildGeometry(new Point(0, 0));
             return GetIcon(geometry, null);
