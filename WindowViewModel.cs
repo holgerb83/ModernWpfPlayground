@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using ModernWpfPlayground.MvvmStuff;
+using Prism.Commands;
 
 namespace ModernWpfPlayground
 {
@@ -43,11 +44,11 @@ namespace ModernWpfPlayground
 
         public WindowViewModel()
         {
-            ShowDialogCommand = new RelayCommand(async x => await ShowDialogAsync().ConfigureAwait(false));
-            CloseCommand = new RelayCommand(x => Application.Current.Shutdown());
-            OpenViewModelCommand = new RelayCommand(x => LoadViewModel());
-            SaveViewModelCommand = new RelayCommand(x => SaveViewModel());
-            ResetViewModelCommand = new RelayCommand(x =>
+            ShowDialogCommand = new DelegateCommand(async () => await ShowDialogAsync().ConfigureAwait(false));
+            CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
+            OpenViewModelCommand = new DelegateCommand(LoadViewModel);
+            SaveViewModelCommand = new DelegateCommand(SaveViewModel);
+            ResetViewModelCommand = new DelegateCommand(() =>
             {
                 ResetViewModel();
                 Path = null;
@@ -91,7 +92,7 @@ namespace ModernWpfPlayground
             set => SetProperty(value);
         }
 
-        public RelayCommand ShowDialogCommand { get; }
+        public ICommand ShowDialogCommand { get; }
 
         public string WelcomeMessage
         {
