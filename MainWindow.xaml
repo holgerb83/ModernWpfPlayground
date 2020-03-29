@@ -11,14 +11,12 @@
     Title="{Binding Title}"
     Width="1200"
     Height="600"
+    d:DataContext="{d:DesignInstance local:WindowViewModel}"
     ui:TitleBar.ExtendViewIntoTitleBar="True"
     ui:WindowHelper.UseModernWindowStyle="True"
     TextOptions.TextFormattingMode="Display"
     UseLayoutRounding="True"
     mc:Ignorable="d">
-    <Window.DataContext>
-        <local:WindowViewModel />
-    </Window.DataContext>
     <Window.Resources>
         <local:PixelsToGridLengthConverter x:Key="PixelsToGridLength" />
     </Window.Resources>
