@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -108,43 +107,6 @@ namespace ModernWpfPlayground
 
         public ICommand ResetViewModelCommand { get; }
 
-        private object? CastToType(string key, JsonElement value)
-        {
-
-            var property = Array.Find(_properties, x => x.Name == key);
-            if (property == null)
-            {
-                return default;
-            }
-
-            if (property.PropertyType == typeof(double))
-            {
-                return value.GetDouble();
-            }
-
-            if (property.PropertyType == typeof(bool))
-            {
-                return value.GetBoolean();
-            }
-
-            if (property.PropertyType == typeof(int))
-            {
-                return value.GetInt32();
-            }
-
-            if (property.PropertyType.IsEnum)
-            {
-                return Enum.ToObject(property.PropertyType, value.GetInt32());
-            }
-
-            if (property.PropertyType == typeof(string))
-            {
-                return value.GetString();
-            }
-
-            return default;
-        }
-
         private void SaveViewModel()
         {
             var contents = JsonSerializer.Serialize(Values);
@@ -169,7 +131,7 @@ namespace ModernWpfPlayground
             var obj = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(contents);
             foreach (var (key, value) in obj)
             {
-                yield return (key, CastToType(key, value));
+                yield return (key, _properties.Find(key).Convert(value));
             }
         }
     }
