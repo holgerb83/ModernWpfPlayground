@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Prism.Mvvm;
 
 namespace ModernWpfPlayground.MvvmStuff
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : BindableBase
     {
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
 
@@ -18,7 +18,7 @@ namespace ModernWpfPlayground.MvvmStuff
             if (_values.TryGetValue(propertyName, out var obj) && Equals(value, obj)) return false;
 
             _values[propertyName] = value!;
-            OnPropertyChanged(propertyName);
+            RaisePropertyChanged(propertyName);
             onChanged?.Invoke(value);
             return true;
         }
@@ -29,20 +29,12 @@ namespace ModernWpfPlayground.MvvmStuff
             return Values.TryGetValue(propertyName, out var obj) ? (T) obj : defaultValue;
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         protected void ResetViewModel()
         {
             foreach (var key in Values.Keys)
             {
                 _values.Remove(key);
-                OnPropertyChanged(key);
+                RaisePropertyChanged(key);
             }
         }
 
@@ -53,7 +45,7 @@ namespace ModernWpfPlayground.MvvmStuff
             foreach (var (key, value) in GetViewModelItems())
             {
                 _values[key] = value!;
-                OnPropertyChanged(key);
+                RaisePropertyChanged(key);
             }
         }
     }

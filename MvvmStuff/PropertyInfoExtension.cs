@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text.Json;
 
-namespace ModernWpfPlayground
+namespace ModernWpfPlayground.MvvmStuff
 {
     public static class PropertyInfoExtension
     {
@@ -10,8 +10,7 @@ namespace ModernWpfPlayground
 
         public static object? Convert(this PropertyInfo? propertyInfo, JsonElement value)
         {
-            if (propertyInfo == default) return default;
-
+            if (propertyInfo == null) return default;
 
             if (propertyInfo.PropertyType == typeof(double))
             {

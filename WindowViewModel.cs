@@ -13,33 +13,10 @@ namespace ModernWpfPlayground
 {
     public class WindowViewModel : BaseViewModel
     {
+        private const string AppName = "TaBEA 3.0.0";
         private readonly PropertyInfo[] _properties;
         private string? _path;
         private string _title = AppName;
-        private const string AppName = "TaBEA 3.0.0";
-
-        public string? Path
-        {
-            get => _path;
-            private set
-            {
-                if (Equals(_path, value)) return;
-                _path = value;
-                OnPropertyChanged();
-                Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName;
-            }
-        }
-
-        public string Title
-        {
-            get => _title;
-            set
-            {
-                if (Equals(_title, value)) return;
-                _title = value;
-                OnPropertyChanged();
-            }
-        }
 
         public WindowViewModel()
         {
@@ -55,22 +32,23 @@ namespace ModernWpfPlayground
             _properties = GetType().GetProperties();
         }
 
-        private async Task ShowDialogAsync()
+        public string? Path
         {
-            var dialog = new ContentDialogExample {Message = WelcomeMessage};
-            var result = await dialog.ShowAsync().ConfigureAwait(false);
-            WelcomeMessage = result.ToString();
+            get => _path;
+            private set => SetProperty(ref _path, value,
+                    () => Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName);
+        }
+
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
         public bool BooleanValue
         {
             get => GetProperty(true);
             set => SetProperty(value, BooleanValue_OnChanged);
-        }
-
-        private void BooleanValue_OnChanged(bool obj)
-        {
-            VisibilityEnumTest = obj ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public Visibility VisibilityEnumTest
@@ -106,6 +84,18 @@ namespace ModernWpfPlayground
         public ICommand SaveViewModelCommand { get; }
 
         public ICommand ResetViewModelCommand { get; }
+
+        private async Task ShowDialogAsync()
+        {
+            var dialog = new ContentDialogExample {Message = WelcomeMessage};
+            var result = await dialog.ShowAsync().ConfigureAwait(false);
+            WelcomeMessage = result.ToString();
+        }
+
+        private void BooleanValue_OnChanged(bool obj)
+        {
+            VisibilityEnumTest = obj ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         private void SaveViewModel()
         {
