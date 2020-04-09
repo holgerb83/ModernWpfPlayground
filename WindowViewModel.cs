@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
+using ModernWpf;
 using ModernWpfPlayground.MvvmStuff;
 using Prism.Commands;
 
@@ -14,7 +14,6 @@ namespace ModernWpfPlayground
     public class WindowViewModel : BaseViewModel
     {
         private const string AppName = "TaBEA 3.0.0";
-        private readonly PropertyInfo[] _properties;
         private string? _path;
         private string _title = AppName;
 
@@ -29,7 +28,6 @@ namespace ModernWpfPlayground
                 ResetViewModel();
                 Path = null;
             });
-            _properties = GetType().GetProperties();
         }
 
         public string? Path
@@ -85,6 +83,23 @@ namespace ModernWpfPlayground
 
         public ICommand ResetViewModelCommand { get; }
 
+        public ThemeMode ThemeMode
+        {
+            get => GetProperty(ThemeMode.UseSystemSetting);
+            set => SetProperty(value, SetTheme);
+        }
+
+        private static void SetTheme(ThemeMode themeMode)
+        {
+            ThemeManager.Current.ApplicationTheme = themeMode switch
+            {
+                ThemeMode.Light => ApplicationTheme.Light,
+                ThemeMode.Dark => ApplicationTheme.Dark,
+                ThemeMode.UseSystemSetting => default,
+                _ => ThemeManager.Current.ApplicationTheme
+            };
+        }
+
         private async Task ShowDialogAsync()
         {
             var dialog = new ContentDialogExample {Message = WelcomeMessage};
@@ -121,7 +136,7 @@ namespace ModernWpfPlayground
             var obj = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(contents);
             foreach (var (key, value) in obj)
             {
-                yield return (key, _properties.Find(key).Convert(value));
+                yield return (key, value.Convert(ObjectAccessor[key].GetType()));
             }
         }
     }

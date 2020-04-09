@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using FastMember;
 using Prism.Mvvm;
 
 namespace ModernWpfPlayground.MvvmStuff
 {
     public abstract class BaseViewModel : BindableBase
     {
+        protected BaseViewModel()
+        {
+            ObjectAccessor = ObjectAccessor.Create(this);
+        }
+
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>();
+        protected readonly ObjectAccessor ObjectAccessor;
 
         protected IReadOnlyDictionary<string, object> Values => _values;
 
@@ -44,8 +51,7 @@ namespace ModernWpfPlayground.MvvmStuff
         {
             foreach (var (key, value) in GetViewModelItems())
             {
-                _values[key] = value!;
-                RaisePropertyChanged(key);
+                ObjectAccessor[key] = value;
             }
         }
     }

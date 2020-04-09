@@ -39,7 +39,7 @@
         <!--  TitleBar  -->
         <Grid
             Height="{Binding ElementName=Window, Path=(ui:TitleBar.Height)}"
-            Background="#DDDDDD"
+            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
             DockPanel.Dock="Top">
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -185,7 +185,6 @@
             <TreeView
                 Grid.Column="1"
                 MinWidth="180"
-                Background="#F3F3F3"
                 BorderThickness="0">
                 <TreeViewItem Header="Root" IsExpanded="True">
                     <TreeViewItem Header="Child1" />
@@ -219,6 +218,7 @@
                 </TabItem>
                 <TabItem Header="General" IsSelected="True">
                     <ui:SimpleStackPanel Margin="5" Spacing="10">
+                        <propertyPresenter2:PropertyPresenter2 Label="Theme Mode" Value="{Binding ThemeMode}" />
                         <propertyPresenter2:PropertyPresenter2
                             Command="{Binding ShowDialogCommand}"
                             Label="Hello"

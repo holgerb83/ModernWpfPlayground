@@ -1,38 +1,35 @@
 ﻿using System;
-using System.Reflection;
 using System.Text.Json;
 
 namespace ModernWpfPlayground.MvvmStuff
 {
     public static class PropertyInfoExtension
     {
-        public static PropertyInfo? Find(this PropertyInfo[] infos, string key) => Array.Find(infos, x => x.Name == key);
-
-        public static object? Convert(this PropertyInfo? propertyInfo, JsonElement value)
+        public static object? Convert(this JsonElement value, Type propertyType)
         {
-            if (propertyInfo == null) return default;
+            if (propertyType == null) return default;
 
-            if (propertyInfo.PropertyType == typeof(double))
+            if (propertyType == typeof(double))
             {
                 return value.GetDouble();
             }
 
-            if (propertyInfo.PropertyType == typeof(bool))
+            if (propertyType == typeof(bool))
             {
                 return value.GetBoolean();
             }
 
-            if (propertyInfo.PropertyType == typeof(int))
+            if (propertyType == typeof(int))
             {
                 return value.GetInt32();
             }
 
-            if (propertyInfo.PropertyType.IsEnum)
+            if (propertyType.IsEnum)
             {
-                return Enum.ToObject(propertyInfo.PropertyType, value.GetInt32());
+                return Enum.ToObject(propertyType, value.GetInt32());
             }
 
-            if (propertyInfo.PropertyType == typeof(string))
+            if (propertyType == typeof(string))
             {
                 return value.GetString();
             }
