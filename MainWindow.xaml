@@ -12,6 +12,7 @@
     Width="1200"
     Height="600"
     d:DataContext="{d:DesignInstance local:WindowViewModel}"
+    ui:ThemeManager.IsThemeAware="True"
     ui:TitleBar.ExtendViewIntoTitleBar="True"
     ui:WindowHelper.UseModernWindowStyle="True"
     TextOptions.TextFormattingMode="Display"
