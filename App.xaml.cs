@@ -11,7 +11,7 @@ namespace ModernWpfPlayground
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<MainWindow>();
-            containerRegistry.Register<WindowViewModel>();
+            containerRegistry.Register<MainWindowViewModel>();
         }
 
         protected override Window CreateShell()

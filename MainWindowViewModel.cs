@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -8,16 +7,19 @@ using Microsoft.Win32;
 using ModernWpf;
 using ModernWpfPlayground.MvvmStuff;
 using Prism.Commands;
+using YamlDotNet.Serialization;
 
 namespace ModernWpfPlayground
 {
-    public class WindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         private const string AppName = "TaBEA 3.0.0";
         private string? _path;
         private string _title = AppName;
+        private readonly ISerializer _serializer;
+        private readonly IDeserializer _deserializer;
 
-        public WindowViewModel()
+        public MainWindowViewModel()
         {
             ShowDialogCommand = new DelegateCommand(async () => await ShowDialogAsync().ConfigureAwait(false));
             CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
@@ -28,13 +30,15 @@ namespace ModernWpfPlayground
                 ResetViewModel();
                 Path = null;
             });
+            _serializer = new SerializerBuilder().Build();
+            _deserializer = new DeserializerBuilder().Build();
         }
 
         public string? Path
         {
             get => _path;
             private set => SetProperty(ref _path, value,
-                    () => Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName);
+                () => Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName);
         }
 
         public string Title
@@ -114,10 +118,10 @@ namespace ModernWpfPlayground
 
         private void SaveViewModel()
         {
-            var contents = JsonSerializer.Serialize(Values);
+            var contents = _serializer.Serialize(Values);
             if (Path == null)
             {
-                var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.json"};
+                var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
                 var result = saveFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
                 if (result != true) return;
                 Path = saveFileDialog.FileName;
@@ -128,15 +132,16 @@ namespace ModernWpfPlayground
 
         protected override IEnumerable<(string key, object? value)> GetViewModelItems()
         {
-            var openFileDialog = new OpenFileDialog {AddExtension = true, DefaultExt = "*.json"};
+            var openFileDialog = new OpenFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
             var result = openFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
             if (result != true) yield break;
 
             var contents = File.ReadAllText(Path = openFileDialog.FileName);
-            var obj = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(contents);
+
+            var obj = _deserializer.Deserialize<Dictionary<string, object>>(contents);
             foreach (var (key, value) in obj)
             {
-                yield return (key, value.Convert(ObjectAccessor[key].GetType()));
+                yield return (key, DeserializationExtension.Convert(value, ObjectAccessor[key].GetType()));
             }
         }
     }
