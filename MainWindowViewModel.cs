@@ -93,6 +93,18 @@ namespace ModernWpfPlayground
             set => SetProperty(value, SetTheme);
         }
 
+        public int WindowWidth
+        {
+            get => GetProperty(1200);
+            set => SetProperty(value);
+        }
+
+        public int WindowHeight
+        {
+            get => GetProperty(600);
+            set => SetProperty(value);
+        }
+
         private static void SetTheme(ThemeMode themeMode)
         {
             ThemeManager.Current.ApplicationTheme = themeMode switch
