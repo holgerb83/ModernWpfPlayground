@@ -3,72 +3,72 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace ModernWpfPlayground.PropertyPresenter
 {
     /// <inheritdoc cref="ContentControl" />
     /// <summary>
     /// Interaction logic for PropertyPresenter.xaml
     /// </summary>
     [ContentProperty(nameof(Value))]
-    public sealed partial class PropertyPresenter2
+    public sealed partial class PropertyPresenter
     {
         /// <summary>
         ///     Button alignment property.
         /// </summary>
-        public static readonly DependencyProperty ButtonAlignmentProperty = DependencyProperty.Register(nameof(ButtonAlignment), typeof(Dock), typeof(PropertyPresenter2), new PropertyMetadata(Dock.Right));
+        public static readonly DependencyProperty ButtonAlignmentProperty = DependencyProperty.Register(nameof(ButtonAlignment), typeof(Dock), typeof(PropertyPresenter), new PropertyMetadata(Dock.Right));
 
         /// <summary>
         ///     Content of the command property.
         /// </summary>
-        public static readonly DependencyProperty CommandContentProperty = DependencyProperty.Register(nameof(CommandContent), typeof(object), typeof(PropertyPresenter2), new PropertyMetadata("..."));
+        public static readonly DependencyProperty CommandContentProperty = DependencyProperty.Register(nameof(CommandContent), typeof(object), typeof(PropertyPresenter), new PropertyMetadata("..."));
 
         /// <summary>
         ///     Command Parameter property
         /// </summary>
-        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(PropertyPresenter2), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(PropertyPresenter), new PropertyMetadata(default(object)));
 
         /// <summary>
         ///     Command property
         /// </summary>
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(PropertyPresenter2), new PropertyMetadata(default(ICommand)));
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(PropertyPresenter), new PropertyMetadata(default(ICommand)));
 
         /// <summary>
         ///     is checked property.
         /// </summary>
-        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool?), typeof(PropertyPresenter2), new FrameworkPropertyMetadata(default(bool?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool?), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(bool?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         ///     Is readonly property
         /// </summary>
-        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(PropertyPresenter2), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(PropertyPresenter), new PropertyMetadata(default(bool)));
 
         /// <summary>
         ///     Label property
         /// </summary>
-        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(string), typeof(PropertyPresenter2), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(nameof(Label), typeof(string), typeof(PropertyPresenter), new PropertyMetadata(default(string)));
 
         /// <summary>
         ///     label width property.
         /// </summary>
-        public static readonly DependencyProperty LabelWidthProperty = DependencyProperty.Register(nameof(LabelWidth), typeof(double), typeof(PropertyPresenter2), new PropertyMetadata(150.0));
+        public static readonly DependencyProperty LabelWidthProperty = DependencyProperty.Register(nameof(LabelWidth), typeof(double), typeof(PropertyPresenter), new PropertyMetadata(150.0));
 
         /// <summary>
         ///     Symbol Property
         /// </summary>
-        public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(object), typeof(PropertyPresenter2), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(object), typeof(PropertyPresenter), new PropertyMetadata(default(object)));
 
         /// <summary>
         ///     Value Property
         /// </summary>
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(object), typeof(PropertyPresenter2), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(object), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         ///     Watermark Property
         /// </summary>
-        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(PropertyPresenter2), new FrameworkPropertyMetadata(default(string)));
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(string)));
 
         /// <inheritdoc />
-        public PropertyPresenter2()
+        public PropertyPresenter()
         {
             InitializeComponent();
         }

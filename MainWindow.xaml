@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
     xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:propertyPresenter="clr-namespace:ModernWpfPlayground.PropertyPresenter"
     x:Name="Window"
     Title="{Binding Title}"
     Width="{Binding WindowWidth, Mode=TwoWay}"
@@ -221,23 +221,23 @@
                 </TabItem>
                 <TabItem Header="General" IsSelected="True">
                     <ui:SimpleStackPanel Margin="5" Spacing="10">
-                        <propertyPresenter2:PropertyPresenter2 Label="Theme Mode" Value="{Binding ThemeMode}" />
-                        <propertyPresenter2:PropertyPresenter2
+                        <propertyPresenter:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
+                        <propertyPresenter:PropertyPresenter
                             Command="{Binding ShowDialogCommand}"
                             Label="Hello"
                             Symbol="x³"
                             Value="{Binding WelcomeMessage}" />
-                        <propertyPresenter2:PropertyPresenter2
+                        <propertyPresenter:PropertyPresenter
                             IsReadOnly="True"
                             Label="Hallo"
                             Symbol="x²"
                             Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                        <propertyPresenter2:PropertyPresenter2
+                        <propertyPresenter:PropertyPresenter
                             Label="Good bye"
                             Symbol="x²"
                             Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                        <propertyPresenter2:PropertyPresenter2 Label="Hello" Value="{Binding BooleanValue}" />
-                        <propertyPresenter2:PropertyPresenter2 Label="Hello">
+                        <propertyPresenter:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
+                        <propertyPresenter:PropertyPresenter Label="Hello">
                             <Slider
                                 AutoToolTipPlacement="TopLeft"
                                 Interval="1"
@@ -247,13 +247,13 @@
                                 TickFrequency="10"
                                 TickPlacement="BottomRight"
                                 Value="{Binding SliderTest}" />
-                        </propertyPresenter2:PropertyPresenter2>
+                        </propertyPresenter:PropertyPresenter>
                         <ui:ProgressRing
                             Width="{Binding SliderTest}"
                             Height="{Binding SliderTest}"
                             IsActive="{Binding BooleanValue}"
                             Visibility="{Binding VisibilityEnumTest}" />
-                        <propertyPresenter2:PropertyPresenter2 Label="Visi" Value="{Binding VisibilityEnumTest}" />
+                        <propertyPresenter:PropertyPresenter Label="Visi" Value="{Binding VisibilityEnumTest}" />
                         <TextBox Text="Dummy" />
                     </ui:SimpleStackPanel>
                 </TabItem>
