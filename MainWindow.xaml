@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:propertyPresenter="clr-namespace:ModernWpfPlayground.PropertyPresenter"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
     x:Name="Window"
     Title="{Binding Title}"
     Width="{Binding WindowWidth, Mode=TwoWay}"
@@ -155,109 +155,118 @@
         <Grid Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Column="0"
                 Background="#2C2C2C"
                 BorderThickness="0">
-                <StackPanel HorizontalAlignment="Center">
+                <ui:SimpleStackPanel HorizontalAlignment="Center" Spacing="10">
+                    <ui:SimpleStackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="ui:ToggleSwitch">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ui:SimpleStackPanel.Resources>
+                    <ui:ToggleSwitch Margin="0,5,0,0" IsOn="{Binding IsPaneOpen}" />
                     <TextBlock
-                        Margin="0,10"
                         Cursor="Hand"
                         FontSize="20"
                         Foreground="#F4F4F4"
-                        Text="Dummy active">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="270" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
+                        Text="Dummy active" />
                     <TextBlock
-                        Margin="0,10"
                         Cursor="Hand"
                         FontSize="20"
                         Foreground="#808080"
-                        Text="Dummy inactive">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="270" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </StackPanel>
+                        Text="Dummy inactive" />
+                </ui:SimpleStackPanel>
             </Border>
-            <TreeView
+            <ui:SplitView
                 Grid.Column="1"
-                MinWidth="180"
-                BorderThickness="0">
-                <TreeViewItem Header="Root" IsExpanded="True">
-                    <TreeViewItem Header="Child1" />
-                    <TreeViewItem Header="Child2" />
-                    <TreeViewItem Header="Child3" />
-                </TreeViewItem>
-            </TreeView>
-            <TabControl Grid.Column="2">
-                <TabItem Header="Bolt">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <ui:SimpleStackPanel
-                            Grid.Column="0"
-                            Margin="5"
-                            Orientation="Vertical"
-                            Spacing="5">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                Command="{Binding OpenViewModelCommand}"
-                                Content="Open" />
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                Command="{Binding SaveViewModelCommand}"
-                                Content="Save" />
+                BorderThickness="0"
+                DisplayMode="Inline"
+                IsPaneOpen="{Binding IsPaneOpen}"
+                PanePlacement="Left">
+                <ui:SplitView.Pane>
+                    <TreeViewItem Header="Root" IsExpanded="True">
+                        <TreeViewItem Header="Child1" />
+                        <TreeViewItem Header="Child2" />
+                        <TreeViewItem Header="Child3" />
+                    </TreeViewItem>
+                </ui:SplitView.Pane>
+                <TabControl>
+                    <TabItem Header="Bolt">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <ui:SimpleStackPanel
+                                Grid.Column="0"
+                                Margin="5"
+                                Orientation="Vertical"
+                                Spacing="5">
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    Command="{Binding OpenViewModelCommand}"
+                                    Content="Open" />
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    Command="{Binding SaveViewModelCommand}"
+                                    Content="Save" />
+                            </ui:SimpleStackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="General" IsSelected="True">
+                        <ui:SimpleStackPanel Margin="5" Spacing="10">
+                            <propertyPresenter:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
+                            <propertyPresenter:PropertyPresenter
+                                Command="{Binding ShowDialogCommand}"
+                                Label="Hello"
+                                Symbol="x³"
+                                Value="{Binding WelcomeMessage}" />
+                            <propertyPresenter:PropertyPresenter
+                                IsReadOnly="True"
+                                Label="Hallo"
+                                Symbol="x²"
+                                Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                            <propertyPresenter:PropertyPresenter
+                                Label="Good bye"
+                                Symbol="x²"
+                                Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                            <propertyPresenter:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
+                            <propertyPresenter:PropertyPresenter Label="Hello">
+                                <Slider
+                                    AutoToolTipPlacement="TopLeft"
+                                    Interval="1"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="150"
+                                    Minimum="50"
+                                    TickFrequency="10"
+                                    TickPlacement="BottomRight"
+                                    Value="{Binding SliderTest}" />
+                            </propertyPresenter:PropertyPresenter>
+                            <ui:ProgressRing
+                                Width="{Binding SliderTest}"
+                                Height="{Binding SliderTest}"
+                                IsActive="{Binding BooleanValue}"
+                                Visibility="{Binding VisibilityEnumTest}" />
+                            <propertyPresenter:PropertyPresenter Label="Visi" Value="{Binding VisibilityEnumTest}" />
                         </ui:SimpleStackPanel>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="General" IsSelected="True">
-                    <ui:SimpleStackPanel Margin="5" Spacing="10">
-                        <propertyPresenter:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
-                        <propertyPresenter:PropertyPresenter
-                            Command="{Binding ShowDialogCommand}"
-                            Label="Hello"
-                            Symbol="x³"
-                            Value="{Binding WelcomeMessage}" />
-                        <propertyPresenter:PropertyPresenter
-                            IsReadOnly="True"
-                            Label="Hallo"
-                            Symbol="x²"
-                            Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                        <propertyPresenter:PropertyPresenter
-                            Label="Good bye"
-                            Symbol="x²"
-                            Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                        <propertyPresenter:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
-                        <propertyPresenter:PropertyPresenter Label="Hello">
-                            <Slider
-                                AutoToolTipPlacement="TopLeft"
-                                Interval="1"
-                                IsSnapToTickEnabled="True"
-                                Maximum="150"
-                                Minimum="50"
-                                TickFrequency="10"
-                                TickPlacement="BottomRight"
-                                Value="{Binding SliderTest}" />
-                        </propertyPresenter:PropertyPresenter>
-                        <ui:ProgressRing
-                            Width="{Binding SliderTest}"
-                            Height="{Binding SliderTest}"
-                            IsActive="{Binding BooleanValue}"
-                            Visibility="{Binding VisibilityEnumTest}" />
-                        <propertyPresenter:PropertyPresenter Label="Visi" Value="{Binding VisibilityEnumTest}" />
-                        <TextBox Text="Dummy" />
-                    </ui:SimpleStackPanel>
-                </TabItem>
-            </TabControl>
+                    </TabItem>
+                </TabControl>
+            </ui:SplitView>
         </Grid>
     </DockPanel>
 </Window>

@@ -18,6 +18,7 @@ namespace ModernWpfPlayground
         private string _title = AppName;
         private readonly ISerializer _serializer;
         private readonly IDeserializer _deserializer;
+        private bool _isPaneOpen = true;
 
         public MainWindowViewModel()
         {
@@ -103,6 +104,12 @@ namespace ModernWpfPlayground
         {
             get => GetProperty(600);
             set => SetProperty(value);
+        }
+
+        public bool IsPaneOpen
+        {
+            get => _isPaneOpen;
+            set => SetProperty(ref _isPaneOpen, value);
         }
 
         private static void SetTheme(ThemeMode themeMode)
