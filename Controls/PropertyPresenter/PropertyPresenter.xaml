@@ -1,10 +1,10 @@
 ﻿<ContentControl
-    x:Class="ModernWpfPlayground.PropertyPresenter.PropertyPresenter"
+    x:Class="Controls.PropertyPresenter"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:propertyPresenter2="clr-namespace:ModernWpfPlayground.PropertyPresenter2"
+    xmlns:controls="clr-namespace:Controls"
     x:Name="LayoutRoot"
     d:DesignHeight="300"
     d:DesignWidth="300"
@@ -16,13 +16,13 @@
     <ContentControl.Resources>
         <DataTemplate x:Key="DefaultDataTemplate">
             <Grid>
-                <propertyPresenter2:TextBoxEx
+                <controls:TextBoxEx
                     x:Name="InputTextBox"
                     Text="{Binding Value, ElementName=LayoutRoot}"
                     Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"
                     Validation.ValidationAdornerSiteFor="{Binding ElementName=LayoutRoot}">
                     <TextBox.Style>
-                        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type propertyPresenter2:TextBoxEx}">
+                        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type controls:TextBoxEx}">
                             <Setter Property="IsReadOnly" Value="True" />
                             <Setter Property="UpdateBindingOnEnter" Value="False" />
                             <Style.Triggers>
@@ -38,7 +38,7 @@
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
-                </propertyPresenter2:TextBoxEx>
+                </controls:TextBoxEx>
                 <TextBlock
                     Margin="6,0,0,0"
                     Padding="2,2,2,2"
@@ -86,7 +86,7 @@
                 </CheckBox.Style>
             </CheckBox>
         </DataTemplate>
-        <propertyPresenter2:EnumToKeyValueListConverter x:Key="EnumToKeyValuePairConverter" />
+        <controls:EnumToKeyValueListConverter x:Key="EnumToKeyValuePairConverter" />
         <DataTemplate x:Key="EnumComboBoxDataTemplate">
             <ComboBox
                 DisplayMemberPath="Key"
@@ -112,7 +112,7 @@
                 </ComboBox.Style>
             </ComboBox>
         </DataTemplate>
-        <propertyPresenter2:PropertyDataTemplateSelector
+        <controls:PropertyDataTemplateSelector
             x:Key="DataTemplateSelector"
             BooleanDataTemplate="{StaticResource BooleanDataTemplate}"
             DefaultDataTemplate="{StaticResource DefaultDataTemplate}"
@@ -152,7 +152,7 @@
                 VerticalAlignment="Center"
                 Focusable="False"
                 Text="{Binding Label, ElementName=LayoutRoot}" />
-            <propertyPresenter2:MagicSymbolControl
+            <controls:MagicSymbolControl
                 x:Name="PartSymbol"
                 Grid.Column="2"
                 Margin="5,0"

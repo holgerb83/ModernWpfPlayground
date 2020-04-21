@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace Controls
 {
     /// <summary>
     /// Converts enums to a List with KeyValuePairs.

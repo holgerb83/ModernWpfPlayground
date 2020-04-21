@@ -11,7 +11,7 @@ using Brushes = System.Windows.Media.Brushes;
 using FontFamily = System.Windows.Media.FontFamily;
 using Point = System.Windows.Point;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace Controls
 {
     /// <summary>
     /// Makes an Bitmap from every Imageformat.

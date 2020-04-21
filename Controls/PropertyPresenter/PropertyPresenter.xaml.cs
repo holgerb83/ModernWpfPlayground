@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 
-namespace ModernWpfPlayground.PropertyPresenter
+namespace Controls
 {
     /// <inheritdoc cref="ContentControl" />
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace Controls
 {
     /// <summary>
     /// A component of the symbol

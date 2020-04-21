@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace Controls
 {
     /// <summary>
     /// Selects the right template on base of value-type.

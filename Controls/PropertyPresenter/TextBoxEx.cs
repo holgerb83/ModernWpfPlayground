@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ModernWpfPlayground.PropertyPresenter2
+namespace Controls
 {
     /// <inheritdoc />
     /// <summary>
@@ -38,7 +38,7 @@ namespace ModernWpfPlayground.PropertyPresenter2
 
         /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:ModernWpfPlayground.PropertyPresenter2.TextBoxEx" /> class.
+        /// Initializes a new instance of the <see cref="T:Controls.TextBoxEx" /> class.
         /// </summary>
         public TextBoxEx()
         {
