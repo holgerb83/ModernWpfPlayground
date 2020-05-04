@@ -39,7 +39,7 @@ namespace ModernWpfPlayground.MvvmStuff
 
         protected void ResetViewModel(Func<string, bool>? predicate = null)
         {
-            IEnumerable<string> keys = _values.Keys;
+            IEnumerable<string> keys = _values.Keys.ToArray();
             if (predicate != null) keys = keys.Where(predicate);
             foreach (var key in keys)
             {

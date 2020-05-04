@@ -11,6 +11,7 @@ using YamlDotNet.Serialization;
 
 namespace ModernWpfPlayground
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BaseViewModel
     {
         private const string AppName = "TaBEA 3.0.0";
@@ -21,7 +22,7 @@ namespace ModernWpfPlayground
 
         public MainWindowViewModel()
         {
-            ShowDialogCommand = new DelegateCommand(async () => await ShowDialogAsync().ConfigureAwait(false));
+            ShowDialogCommand = new DelegateCommand(() => ShowDialogAsync().Await());
             CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
             OpenViewModelCommand = new DelegateCommand(LoadViewModel);
             SaveViewModelCommand = new DelegateCommand(SaveViewModel);
