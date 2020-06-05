@@ -22,7 +22,7 @@ namespace ModernWpfPlayground
 
         public MainWindowViewModel()
         {
-            ShowDialogCommand = new DelegateCommand(() => ShowDialogAsync().Await());
+            ShowDialogCommand = new DelegateCommand(ShowDialog);
             CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
             OpenViewModelCommand = new DelegateCommand(LoadViewModel);
             SaveViewModelCommand = new DelegateCommand(SaveViewModel);
@@ -35,10 +35,10 @@ namespace ModernWpfPlayground
             _deserializer = new DeserializerBuilder().Build();
         }
 
-        public string? Path
+        private string? Path
         {
             get => _path;
-            private set => SetProperty(ref _path, value,
+            set => SetProperty(ref _path, value,
                 () => Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName);
         }
 
@@ -123,11 +123,10 @@ namespace ModernWpfPlayground
             };
         }
 
-        private async Task ShowDialogAsync()
+        private void ShowDialog()
         {
             var dialog = new ContentDialogExample {Message = WelcomeMessage};
-            var result = await dialog.ShowAsync().ConfigureAwait(false);
-            WelcomeMessage = result.ToString();
+            dialog.ShowAsync().Await(completedCallback: x => WelcomeMessage = x.ToString());
         }
 
         private void BooleanValue_OnChanged(bool obj)
