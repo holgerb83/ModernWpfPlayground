@@ -59,7 +59,6 @@
                 <ColumnDefinition Width="{Binding ElementName=Window, Path=(ui:TitleBar.SystemOverlayLeftInset), Converter={StaticResource PixelsToGridLength}}" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Menu
                 Grid.Column="1"
@@ -112,18 +111,11 @@
             <!--  Horizontally centered title  -->
             <TextBlock
                 Grid.Column="0"
-                Grid.ColumnSpan="4"
+                Grid.ColumnSpan="3"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="13"
                 Text="{Binding ElementName=Window, Path=Title}" />
-            <ui:PersonPicture
-                Grid.Column="3"
-                Height="24"
-                Margin="0,0,150,0"
-                DisplayName="Holger Börchers"
-                ToolTip="Holger Börchers"
-                WindowChrome.IsHitTestVisibleInChrome="True" />
         </Grid>
         <!--  Footer  -->
         <Grid
@@ -250,6 +242,23 @@
                                 Label="Good bye"
                                 Symbol="x²"
                                 Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ui:ToggleSwitch
+                                    x:Name="Switch"
+                                    Grid.Column="0"
+                                    Margin="0,0,5,0"
+                                    OffContent="Read/Write"
+                                    OnContent="ReadOnly" />
+                                <TextBox
+                                    x:Name="SimpleTextBox"
+                                    Grid.Column="1"
+                                    IsReadOnly="{Binding IsOn, ElementName=Switch}"
+                                    Text="Eine einfache Textbox" />
+                            </Grid>
                             <controls:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
                             <controls:PropertyPresenter Label="Hello">
                                 <Slider
