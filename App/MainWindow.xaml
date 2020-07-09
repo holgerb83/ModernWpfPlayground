@@ -172,9 +172,10 @@
                         </Style>
                     </ui:SimpleStackPanel.Resources>
                     <ui:ToggleSwitch
+                        x:Name="SplitViewSwitch"
                         Margin="0,5,0,0"
                         IsOn="{Binding IsPaneOpen}"
-                        ToolTip="Show/hide element tree" />
+                        ToolTip="Show/hide navigation" />
                     <TextBlock
                         Cursor="Hand"
                         FontSize="20"
@@ -189,17 +190,29 @@
             </Border>
             <ui:SplitView
                 Grid.Column="1"
-                Panel.ZIndex="0"
                 BorderThickness="0"
                 DisplayMode="Inline"
-                IsPaneOpen="{Binding IsPaneOpen}"
+                IsPaneOpen="{Binding IsOn, ElementName=SplitViewSwitch}"
+                OpenPaneLength="250"
                 PanePlacement="Left">
                 <ui:SplitView.Pane>
-                    <TreeViewItem Header="Root" IsExpanded="True">
-                        <TreeViewItem Header="Child1" />
-                        <TreeViewItem Header="Child2" />
-                        <TreeViewItem Header="Child3" />
-                    </TreeViewItem>
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="10,10,10,0" Text="NAVIGATION" />
+                            <TreeView Grid.Row="1">
+                                <TreeViewItem Header="Root" IsExpanded="True">
+                                    <TreeViewItem Header="Child1" />
+                                    <TreeViewItem Header="Child2" IsEnabled="False" />
+                                    <TreeViewItem Header="Child3" />
+                                </TreeViewItem>
+                            </TreeView>
+                        </Grid>
+                    </ScrollViewer>
+
                 </ui:SplitView.Pane>
                 <TabControl>
                     <TabItem Header="Bolt">
@@ -247,16 +260,25 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <ui:ToggleSwitch
+                                <ToggleButton
                                     x:Name="Switch"
                                     Grid.Column="0"
-                                    Margin="0,0,5,0"
-                                    OffContent="Read/Write"
-                                    OnContent="ReadOnly" />
+                                    Width="145"
+                                    Margin="0,0,5,0">
+                                    <ToggleButton.Style>
+                                        <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="ToggleButton">
+                                            <Setter Property="Content" Value="Read/Write" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="Content" Value="Read only" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
                                 <TextBox
-                                    x:Name="SimpleTextBox"
                                     Grid.Column="1"
-                                    IsReadOnly="{Binding IsOn, ElementName=Switch}"
+                                    IsReadOnly="{Binding IsChecked, ElementName=Switch}"
                                     Text="Eine einfache Textbox" />
                             </Grid>
                             <controls:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
