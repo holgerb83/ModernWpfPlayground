@@ -120,7 +120,7 @@
         <!--  Footer  -->
         <Grid
             Height="24"
-            Background="#00564C"
+            Background="{DynamicResource SystemControlBackgroundAccentBrush}"
             DockPanel.Dock="Bottom">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
@@ -143,12 +143,12 @@
                 HorizontalAlignment="Right"
                 Text="BlaBlaBla" />
         </Grid>
-        <!--  Content  -->
         <Grid Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <!--  Workspace  -->
             <Border
                 Grid.Column="0"
                 Panel.ZIndex="1"
@@ -188,118 +188,125 @@
                         Text="Dummy inactive" />
                 </ui:SimpleStackPanel>
             </Border>
+            <!--  Navigation  -->
             <ui:SplitView
                 Grid.Column="1"
                 BorderThickness="0"
                 DisplayMode="Inline"
                 IsPaneOpen="{Binding IsOn, ElementName=SplitViewSwitch}"
-                OpenPaneLength="250"
+                OpenPaneLength="200"
                 PanePlacement="Left">
                 <ui:SplitView.Pane>
-                    <ScrollViewer>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <TextBlock Margin="10,10,10,0" Text="NAVIGATION" />
-                            <TreeView Grid.Row="1">
-                                <TreeViewItem Header="Root" IsExpanded="True">
-                                    <TreeViewItem Header="Child1" />
-                                    <TreeViewItem Header="Child2" IsEnabled="False" />
-                                    <TreeViewItem Header="Child3" />
-                                </TreeViewItem>
-                            </TreeView>
-                        </Grid>
-                    </ScrollViewer>
-
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="10,10,10,0" Text="NAVIGATION" />
+                        <TreeView Grid.Row="1">
+                            <TreeViewItem Header="Root" IsExpanded="True">
+                                <TreeViewItem Header="Child1" />
+                                <TreeViewItem Header="Child2" />
+                                <TreeViewItem Header="Child3" />
+                            </TreeViewItem>
+                        </TreeView>
+                    </Grid>
                 </ui:SplitView.Pane>
+                <!--  Content  -->
                 <TabControl>
                     <TabItem Header="Bolt">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <ui:SimpleStackPanel
-                                Grid.Column="0"
-                                Margin="5"
-                                Orientation="Vertical"
-                                Spacing="5">
-                                <Button
-                                    HorizontalAlignment="Stretch"
-                                    Command="{Binding OpenViewModelCommand}"
-                                    Content="Open" />
-                                <Button
-                                    HorizontalAlignment="Stretch"
-                                    Command="{Binding SaveViewModelCommand}"
-                                    Content="Save" />
-                            </ui:SimpleStackPanel>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="General" IsSelected="True">
-                        <ui:SimpleStackPanel Margin="5" Spacing="10">
-                            <controls:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
-                            <controls:PropertyPresenter
-                                Command="{Binding ShowDialogCommand}"
-                                Label="Hello"
-                                Symbol="x³"
-                                Value="{Binding WelcomeMessage}" />
-                            <controls:PropertyPresenter
-                                IsReadOnly="True"
-                                Label="Hallo"
-                                Symbol="x²"
-                                Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                            <controls:PropertyPresenter
-                                Label="Good bye"
-                                Symbol="x²"
-                                Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                            <Grid Margin="0,5">
+                        <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
+
+
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <ToggleButton
-                                    x:Name="Switch"
+                                <ui:SimpleStackPanel
                                     Grid.Column="0"
-                                    Width="145"
-                                    Margin="0,0,5,0">
-                                    <ToggleButton.Style>
-                                        <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="ToggleButton">
-                                            <Setter Property="Content" Value="Read/Write" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Content" Value="Read only" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
-                                <TextBox
-                                    Grid.Column="1"
-                                    IsReadOnly="{Binding IsChecked, ElementName=Switch}"
-                                    Text="Eine einfache Textbox" />
+                                    Margin="5"
+                                    Orientation="Vertical"
+                                    Spacing="5">
+                                    <Button
+                                        HorizontalAlignment="Stretch"
+                                        Command="{Binding OpenViewModelCommand}"
+                                        Content="Open" />
+                                    <Button
+                                        HorizontalAlignment="Stretch"
+                                        Command="{Binding SaveViewModelCommand}"
+                                        Content="Save" />
+                                </ui:SimpleStackPanel>
                             </Grid>
-                            <controls:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
-                            <controls:PropertyPresenter Label="Hello">
-                                <Slider
-                                    AutoToolTipPlacement="TopLeft"
-                                    Interval="1"
-                                    IsSnapToTickEnabled="True"
-                                    Maximum="150"
-                                    Minimum="50"
-                                    TickFrequency="10"
-                                    TickPlacement="BottomRight"
-                                    Value="{Binding SliderTest}" />
-                            </controls:PropertyPresenter>
-                            <ui:ProgressRing
-                                Width="{Binding SliderTest}"
-                                Height="{Binding SliderTest}"
-                                IsActive="{Binding BooleanValue}"
-                                Visibility="{Binding VisibilityEnumTest}" />
-                            <controls:PropertyPresenter Label="Visi" Value="{Binding VisibilityEnumTest}" />
-                        </ui:SimpleStackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="General" IsSelected="True">
+                        <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
+
+                            <ui:SimpleStackPanel Margin="5" Spacing="10">
+                                <controls:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
+                                <controls:PropertyPresenter Label="Accent color" Value="{Binding AccentColor}" />
+                                <controls:PropertyPresenter
+                                    Command="{Binding ShowDialogCommand}"
+                                    Label="Hello"
+                                    Symbol="x³"
+                                    Value="{Binding WelcomeMessage}" />
+                                <controls:PropertyPresenter
+                                    IsReadOnly="True"
+                                    Label="Hallo"
+                                    Symbol="x²"
+                                    Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                                <controls:PropertyPresenter
+                                    Label="Good bye"
+                                    Symbol="x²"
+                                    Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                                <Grid Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <ToggleButton
+                                        x:Name="TextBoxSwitch"
+                                        Grid.Column="0"
+                                        Width="145"
+                                        Margin="0,0,5,0">
+                                        <ToggleButton.Style>
+                                            <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="ToggleButton">
+                                                <Setter Property="Content" Value="Read/Write" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Content" Value="Read only" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                    <TextBox
+                                        Grid.Column="1"
+                                        IsReadOnly="{Binding IsChecked, ElementName=TextBoxSwitch}"
+                                        Text="Eine einfache Textbox" />
+                                </Grid>
+                                <controls:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
+                                <controls:PropertyPresenter Label="Hello">
+                                    <Slider
+                                        AutoToolTipPlacement="TopLeft"
+                                        Interval="1"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="150"
+                                        Minimum="50"
+                                        TickFrequency="10"
+                                        TickPlacement="BottomRight"
+                                        Value="{Binding SliderTest}" />
+                                </controls:PropertyPresenter>
+                                <ui:ProgressRing
+                                    Width="{Binding SliderTest}"
+                                    Height="{Binding SliderTest}"
+                                    IsActive="{Binding BooleanValue}"
+                                    Visibility="{Binding VisibilityEnumTest}" />
+                                <controls:PropertyPresenter Label="Visi" Value="{Binding VisibilityEnumTest}" />
+                            </ui:SimpleStackPanel>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
             </ui:SplitView>

@@ -92,7 +92,7 @@
                 DisplayMemberPath="Key"
                 ItemsSource="{Binding Value, ElementName=LayoutRoot, Converter={StaticResource EnumToKeyValuePairConverter}}"
                 SelectedValue="{Binding Value, ElementName=LayoutRoot}"
-                SelectedValuePath="Value"
+                SelectedValuePath="Value" HorizontalAlignment="Stretch"
                 Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"
                 Validation.ValidationAdornerSiteFor="{Binding ElementName=LayoutRoot}">
                 <ComboBox.Style>

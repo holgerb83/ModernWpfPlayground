@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Win32;
 using ModernWpf;
 using ModernWpfPlayground.MvvmStuff;
@@ -92,6 +94,24 @@ namespace ModernWpfPlayground
         {
             get => GetProperty(ThemeMode.UseSystemSetting);
             set => SetProperty(value, SetTheme);
+        }
+
+        public AccentColor AccentColor
+        {
+            get => GetProperty(AccentColor.Green);
+            set => SetProperty(value, SetAccentColor);
+        }
+
+        private static void SetAccentColor(AccentColor accentColor)
+        {
+            ThemeManager.Current.AccentColor = accentColor switch
+            {
+                AccentColor.Green => Color.FromArgb(255, 0, 86, 76),
+                AccentColor.Yellow => Color.FromArgb(255, 164, 144, 0),
+                AccentColor.Blue => Color.FromArgb(255, 0, 120, 215),
+                AccentColor.Purple => Color.FromArgb(255, 104, 33, 122),
+                _ => throw new ArgumentOutOfRangeException(nameof(accentColor), accentColor, null)
+            };
         }
 
         public int WindowWidth
