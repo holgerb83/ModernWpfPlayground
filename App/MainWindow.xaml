@@ -246,7 +246,7 @@
 
                             <ui:SimpleStackPanel Margin="5" Spacing="10">
                                 <controls:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
-                                <controls:PropertyPresenter Label="Accent color" Value="{Binding AccentColor}" />
+                                <controls:PropertyPresenter Label="Accent color" Value="{Binding AccentColors}" />
                                 <controls:PropertyPresenter
                                     Command="{Binding ShowDialogCommand}"
                                     Label="Hello"

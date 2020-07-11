@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.Win32;
-using ModernWpf;
 using ModernWpfPlayground.MvvmStuff;
+using ModernWpfPlayground.Types;
 using Prism.Commands;
 using YamlDotNet.Serialization;
+using static ModernWpf.ThemeManager;
 
 namespace ModernWpfPlayground
 {
@@ -96,23 +95,13 @@ namespace ModernWpfPlayground
             set => SetProperty(value, SetTheme);
         }
 
-        public AccentColor AccentColor
+        public AccentColors AccentColors
         {
-            get => GetProperty(AccentColor.Green);
+            get => GetProperty(AccentColors.Green);
             set => SetProperty(value, SetAccentColor);
         }
 
-        private static void SetAccentColor(AccentColor accentColor)
-        {
-            ThemeManager.Current.AccentColor = accentColor switch
-            {
-                AccentColor.Green => Color.FromArgb(255, 0, 86, 76),
-                AccentColor.Yellow => Color.FromArgb(255, 164, 144, 0),
-                AccentColor.Blue => Color.FromArgb(255, 0, 120, 215),
-                AccentColor.Purple => Color.FromArgb(255, 104, 33, 122),
-                _ => throw new ArgumentOutOfRangeException(nameof(accentColor), accentColor, null)
-            };
-        }
+        private static void SetAccentColor(AccentColors accentColors) => Current.AccentColor = accentColors.ToWindowsColor();
 
         public int WindowWidth
         {
@@ -132,16 +121,7 @@ namespace ModernWpfPlayground
             set => SetProperty(value);
         }
 
-        private static void SetTheme(ThemeMode themeMode)
-        {
-            ThemeManager.Current.ApplicationTheme = themeMode switch
-            {
-                ThemeMode.Light => ApplicationTheme.Light,
-                ThemeMode.Dark => ApplicationTheme.Dark,
-                ThemeMode.UseSystemSetting => default,
-                _ => ThemeManager.Current.ApplicationTheme
-            };
-        }
+        private static void SetTheme(ThemeMode themeMode) => Current.ApplicationTheme = themeMode.ToApplicationTheme();
 
         private void ShowDialog()
         {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using System.Windows.Media;
 using ModernWpf;
+using ModernWpfPlayground.Types;
 using Prism.Ioc;
 
 namespace ModernWpfPlayground
@@ -13,9 +13,10 @@ namespace ModernWpfPlayground
         /// <inheritdoc />
         protected override void OnStartup(StartupEventArgs e)
         {
-            ThemeManager.Current.AccentColor = Color.FromArgb(255, 0, 86, 76);
             base.OnStartup(e);
+            ThemeManager.Current.AccentColor = AccentColors.Green.ToWindowsColor();
         }
+
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
