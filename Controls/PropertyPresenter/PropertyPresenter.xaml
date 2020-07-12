@@ -89,10 +89,11 @@
         <controls:EnumToKeyValueListConverter x:Key="EnumToKeyValuePairConverter" />
         <DataTemplate x:Key="EnumComboBoxDataTemplate">
             <ComboBox
+                HorizontalAlignment="Stretch"
                 DisplayMemberPath="Key"
                 ItemsSource="{Binding Value, ElementName=LayoutRoot, Converter={StaticResource EnumToKeyValuePairConverter}}"
                 SelectedValue="{Binding Value, ElementName=LayoutRoot}"
-                SelectedValuePath="Value" HorizontalAlignment="Stretch"
+                SelectedValuePath="Value"
                 Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"
                 Validation.ValidationAdornerSiteFor="{Binding ElementName=LayoutRoot}">
                 <ComboBox.Style>

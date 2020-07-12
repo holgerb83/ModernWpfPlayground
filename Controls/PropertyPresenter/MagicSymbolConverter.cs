@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+
 namespace Controls
 {
     /// <summary>
@@ -73,7 +74,7 @@ namespace Controls
             var block = new TextBlock();
             foreach (var tc in textComponents)
             {
-                var run = new Run(tc.Text) { FontFamily = new FontFamily("Palatino Linotype"), FontSize = 16 };
+                var run = new Run(tc.Text) {FontFamily = new FontFamily("Palatino Linotype"), FontSize = 16};
                 switch (tc.Style)
                 {
                     case BaselineAlignment.Subscript:
@@ -85,8 +86,10 @@ namespace Controls
                         run.FontSize = 12;
                         break;
                 }
+
                 block.Inlines.Add(run);
             }
+
             block.HorizontalAlignment = HorizontalAlignment.Right;
             block.VerticalAlignment = VerticalAlignment.Center;
             return block;
@@ -109,7 +112,10 @@ namespace Controls
                             textComponents.Add(comp);
                             snippet.Clear();
                         }
-                        alignment = alignment == BaselineAlignment.Subscript ? BaselineAlignment.Baseline : BaselineAlignment.Subscript;
+
+                        alignment = alignment == BaselineAlignment.Subscript
+                            ? BaselineAlignment.Baseline
+                            : BaselineAlignment.Subscript;
                         break;
                     case '^':
                         if (snippet.Length > 0)
@@ -118,13 +124,17 @@ namespace Controls
                             textComponents.Add(comp);
                             snippet.Clear();
                         }
-                        alignment = alignment == BaselineAlignment.Superscript ? BaselineAlignment.Baseline : BaselineAlignment.Superscript;
+
+                        alignment = alignment == BaselineAlignment.Superscript
+                            ? BaselineAlignment.Baseline
+                            : BaselineAlignment.Superscript;
                         break;
                     default:
                         snippet.Append(c);
                         break;
                 }
             }
+
             if (snippet.Length > 0)
             {
                 var comp = new TextComponent(snippet.ToString(), alignment);
