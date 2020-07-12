@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="http://wpflib.de/"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
@@ -82,30 +83,34 @@
                     <MenuItem
                         Command="{Binding ResetViewModelCommand}"
                         Header="New"
+                        Icon="{iconPacks:FontAwesome Kind=FileRegular}"
                         InputGestureText="Ctrl+N" />
                     <MenuItem
                         Command="{Binding OpenViewModelCommand}"
                         Header="Open"
+                        Icon="{iconPacks:FontAwesome Kind=FolderOpenRegular}"
                         InputGestureText="Ctrl+O" />
                     <MenuItem
                         Command="{Binding SaveViewModelCommand}"
                         Header="Save"
+                        Icon="{iconPacks:FontAwesome Kind=SaveRegular}"
                         InputGestureText="Ctrl+S" />
                     <Separator />
                     <MenuItem
                         Command="{Binding CloseCommand}"
                         Header="Close"
+                        Icon="{iconPacks:FontAwesome Kind=WindowCloseRegular}"
                         InputGestureText="Alt+F4" />
                 </MenuItem>
                 <MenuItem Header="Edit">
-                    <MenuItem Header="Copy" />
-                    <MenuItem Header="Cut" />
-                    <MenuItem Header="Paste" />
+                    <MenuItem Header="Copy" Icon="{iconPacks:FontAwesome Kind=CopyRegular}" />
+                    <MenuItem Header="Cut" Icon="{iconPacks:FontAwesome Kind=CutSolid}" />
+                    <MenuItem Header="Paste" Icon="{iconPacks:FontAwesome Kind=ClipboardRegular}" />
                 </MenuItem>
                 <MenuItem Header="Help">
-                    <MenuItem Header="?" />
+                    <MenuItem Header="?" Icon="{iconPacks:FontAwesome Kind=QuestionCircleRegular}" />
                     <Separator />
-                    <MenuItem Header="Info" />
+                    <MenuItem Header="Info" Icon="{iconPacks:FontAwesome Kind=InfoSolid}" />
                 </MenuItem>
             </Menu>
             <!--  Horizontally centered title  -->
