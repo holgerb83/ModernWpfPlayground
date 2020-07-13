@@ -43,8 +43,12 @@ namespace ModernWpfPlayground.MvvmStuff
             if (predicate != null) keys = keys.Where(predicate);
             foreach (var key in keys)
             {
+                var currentValue = ObjectAccessor[key];
                 _values.Remove(key);
-                RaisePropertyChanged(key);
+                var newValue = ObjectAccessor[key];
+                if (Equals(currentValue, newValue)) continue;
+                _values.Add(key, currentValue);
+                ObjectAccessor[key] = newValue;
             }
         }
 
