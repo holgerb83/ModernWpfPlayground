@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1740-pre" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ModernWpf.Controls">
+      <HintPath>..\..\..\.nuget\packages\modernwpfui\0.9.1\lib\netcoreapp3.0\ModernWpf.Controls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

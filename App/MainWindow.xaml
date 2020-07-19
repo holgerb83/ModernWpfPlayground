@@ -242,6 +242,7 @@
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding SaveViewModelCommand}"
                                         Content="Save" />
+                                    <Button Command="{Binding ShowDialogServiceCommand}" Content="Show dialog" />
                                 </ui:SimpleStackPanel>
                             </Grid>
                         </ScrollViewer>
@@ -275,7 +276,8 @@
                                         x:Name="TextBoxSwitch"
                                         Grid.Column="0"
                                         Width="145"
-                                        Margin="0,0,5,0">
+                                        Margin="0,0,5,0"
+                                        VerticalAlignment="Top">
                                         <ToggleButton.Style>
                                             <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="ToggleButton">
                                                 <Setter Property="Content" Value="Read/Write" />
@@ -289,8 +291,12 @@
                                     </ToggleButton>
                                     <TextBox
                                         Grid.Column="1"
+                                        AcceptsReturn="True"
+                                        AcceptsTab="True"
                                         IsReadOnly="{Binding IsChecked, ElementName=TextBoxSwitch}"
-                                        Text="Eine einfache Textbox" />
+                                        MinLines="4"
+                                        Text="{Binding MultiLineText}"
+                                        TextWrapping="Wrap" />
                                 </Grid>
                                 <controls:PropertyPresenter Label="Hello" Value="{Binding BooleanValue}" />
                                 <controls:PropertyPresenter Label="Hello">

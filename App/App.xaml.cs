@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Dialogs;
 using ModernWpf;
 using ModernWpfPlayground.Types;
 using Prism.Ioc;
@@ -22,6 +23,7 @@ namespace ModernWpfPlayground
         {
             containerRegistry.Register<MainWindow>();
             containerRegistry.Register<MainWindowViewModel>();
+            containerRegistry.RegisterDialog<MessageBoxView, MessageBoxViewModel>();
         }
 
         protected override Window CreateShell()

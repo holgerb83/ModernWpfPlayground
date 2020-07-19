@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="FastMember" Version="1.5.0" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.0" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.0.0.1740-pre" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1740-pre" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Controls\Controls.csproj" />
+    <ProjectReference Include="..\Dialogs\Dialogs.csproj" />
   </ItemGroup>
 
 </Project>

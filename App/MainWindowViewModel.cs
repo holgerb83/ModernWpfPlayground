@@ -3,10 +3,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Dialogs;
 using Microsoft.Win32;
 using ModernWpfPlayground.MvvmStuff;
 using ModernWpfPlayground.Types;
 using Prism.Commands;
+using Prism.Services.Dialogs;
 using YamlDotNet.Serialization;
 using static ModernWpf.ThemeManager;
 
@@ -15,14 +17,16 @@ namespace ModernWpfPlayground
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BaseViewModel
     {
+        private readonly IDialogService _service;
         private const string AppName = "TaBEA 3.0.0";
         private string? _path;
         private string _title = AppName;
         private readonly ISerializer _serializer;
         private readonly IDeserializer _deserializer;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IDialogService service)
         {
+            _service = service;
             ShowDialogCommand = new DelegateCommand(ShowDialog);
             CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
             OpenViewModelCommand = new DelegateCommand(LoadViewModel);
@@ -119,6 +123,25 @@ namespace ModernWpfPlayground
         {
             get => GetProperty(true);
             set => SetProperty(value);
+        }
+
+        public string MultiLineText
+        {
+            get => GetProperty("Multi line");
+            set => SetProperty(value);
+        }
+
+        public ICommand ShowDialogServiceCommand => new DelegateCommand(ShowDialogService);
+
+        private void ShowDialogService()
+        {
+            void executeCallBack(IDialogResult result)
+            {
+
+            }
+
+            _service.Show(nameof(MessageBoxView), default, executeCallBack);
+
         }
 
         private static void SetTheme(ThemeMode themeMode) => Current.ApplicationTheme = themeMode.ToApplicationTheme();

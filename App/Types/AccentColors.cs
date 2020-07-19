@@ -18,9 +18,9 @@ namespace ModernWpfPlayground.Types
         {
             return accentColor switch
             {
-                AccentColors.Green => Color.FromRgb(0, 86, 76),
+                AccentColors.Green => Color.FromRgb(33, 115, 70),
                 AccentColors.Yellow => Color.FromRgb(164, 144, 0),
-                AccentColors.Blue => Color.FromRgb(0, 120, 215),
+                AccentColors.Blue => Color.FromRgb(43, 87, 154),
                 AccentColors.Purple => Color.FromRgb(104, 33, 122),
                 AccentColors.Red => Color.FromRgb(183, 71, 42),
                 _ => throw new ArgumentOutOfRangeException(nameof(accentColor), accentColor, null)
