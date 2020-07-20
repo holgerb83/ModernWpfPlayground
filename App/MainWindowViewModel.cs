@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using ModernWpfPlayground.MvvmStuff;
 using ModernWpfPlayground.Types;
 using Prism.Commands;
+using Prism.Logging;
 using Prism.Services.Dialogs;
 using YamlDotNet.Serialization;
 using static ModernWpf.ThemeManager;
@@ -18,15 +19,17 @@ namespace ModernWpfPlayground
     public class MainWindowViewModel : BaseViewModel
     {
         private readonly IDialogService _service;
+        private readonly ILoggerFacade _logger;
         private const string AppName = "TaBEA 3.0.0";
         private string? _path;
         private string _title = AppName;
         private readonly ISerializer _serializer;
         private readonly IDeserializer _deserializer;
 
-        public MainWindowViewModel(IDialogService service)
+        public MainWindowViewModel(IDialogService service, ILoggerFacade logger)
         {
             _service = service;
+            _logger = logger;
             ShowDialogCommand = new DelegateCommand(ShowDialog);
             CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
             OpenViewModelCommand = new DelegateCommand(LoadViewModel);
@@ -135,12 +138,12 @@ namespace ModernWpfPlayground
 
         private void ShowDialogService()
         {
-            void executeCallBack(IDialogResult result)
+            static void ExecuteCallBack(IDialogResult result)
             {
-
+                MessageBox.Show(Application.Current.MainWindow, "DialogResult = " + result.Result);
             }
 
-            _service.Show(nameof(MessageBoxView), default, executeCallBack);
+            _service.ShowDialog(nameof(MessageBoxView), default, ExecuteCallBack);
 
         }
 

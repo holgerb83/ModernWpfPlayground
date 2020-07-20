@@ -3,6 +3,7 @@ using Dialogs;
 using ModernWpf;
 using ModernWpfPlayground.Types;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 
 namespace ModernWpfPlayground
 {
@@ -21,6 +22,7 @@ namespace ModernWpfPlayground
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IDialogService, Dialogs.DialogService>();
             containerRegistry.Register<MainWindow>();
             containerRegistry.Register<MainWindowViewModel>();
             containerRegistry.RegisterDialog<MessageBoxView, MessageBoxViewModel>();

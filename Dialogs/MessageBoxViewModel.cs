@@ -24,7 +24,7 @@ namespace Dialogs
         }
 
         /// <inheritdoc />
-        public string Title { get; }
+        public string Title { get; } = "Hallo Holger";
 
 
         private DelegateCommand<string> _closeDialogCommand;
