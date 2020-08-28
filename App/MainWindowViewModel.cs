@@ -57,19 +57,19 @@ namespace ModernWpfPlayground
 
         public Visibility VisibilityEnumTest
         {
-            get => GetProperty<Visibility>();
+            get => GetProperty(Visibility.Visible);
             set => SetProperty(value);
         }
 
         public double SliderTest
         {
-            get => GetProperty<double>(100);
+            get => GetProperty(100D);
             set => SetProperty(value);
         }
 
         public double ValidationTest
         {
-            get => GetProperty<double>();
+            get => GetProperty(0D);
             set => SetProperty(value);
         }
 

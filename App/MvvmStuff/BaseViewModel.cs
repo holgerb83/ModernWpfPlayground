@@ -16,6 +16,7 @@ namespace ModernWpfPlayground.MvvmStuff
 
         private readonly Dictionary<string, object?> _values = new Dictionary<string, object?>();
         protected readonly ObjectAccessor ObjectAccessor;
+        private readonly Dictionary<string, object?> _defaultValues = new Dictionary<string, object?>();
 
         protected IReadOnlyDictionary<string, object?> Values => _values;
 
@@ -34,21 +35,21 @@ namespace ModernWpfPlayground.MvvmStuff
         protected T GetProperty<T>(T defaultValue = default, [CallerMemberName] string? propertyName = null)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
-            return Values.TryGetValue(propertyName, out var obj) ? (T)obj! : defaultValue;
+            if (Values.TryGetValue(propertyName, out var obj))
+            {
+                return (T) obj!;
+            }
+
+            _defaultValues[propertyName] =defaultValue;
+            return defaultValue;
         }
 
-        protected void ResetViewModel(Func<string, bool>? predicate = null)
+        protected void ResetViewModel()
         {
-            IEnumerable<string> keys = _values.Keys.ToArray();
-            if (predicate != null) keys = keys.Where(predicate);
-            foreach (var key in keys)
+            foreach (var (key, value) in _values.ToArray())
             {
-                var currentValue = ObjectAccessor[key];
-                _values.Remove(key);
-                var newValue = ObjectAccessor[key];
-                if (Equals(currentValue, newValue)) continue;
-                _values.Add(key, currentValue);
-                ObjectAccessor[key] = newValue;
+                if (_defaultValues.TryGetValue(key, out var defaultValue) && Equals(value, defaultValue)) continue;
+                ObjectAccessor[key] = defaultValue;
             }
         }
 
@@ -56,14 +57,11 @@ namespace ModernWpfPlayground.MvvmStuff
 
         protected void LoadViewModel()
         {
-            var keysFromFile = new SortedSet<string>();
+            ResetViewModel();
             foreach (var (key, value) in GetViewModelItems())
             {
-                keysFromFile.Add(key);
                 ObjectAccessor[key] = value;
             }
-
-            ResetViewModel(x => !keysFromFile.Contains(x));
         }
     }
 }
