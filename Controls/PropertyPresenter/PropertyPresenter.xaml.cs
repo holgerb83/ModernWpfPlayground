@@ -85,7 +85,7 @@ namespace Controls
         /// <summary>
         ///     Command.
         /// </summary>
-        public ICommand Command
+        public ICommand? Command
         {
             get => (ICommand)GetValue(CommandProperty);
             set => SetValue(CommandProperty, value);
@@ -94,7 +94,7 @@ namespace Controls
         /// <summary>
         ///     Command content.
         /// </summary>
-        public object CommandContent
+        public object? CommandContent
         {
             get => GetValue(CommandContentProperty);
             set => SetValue(CommandContentProperty, value);
@@ -103,7 +103,7 @@ namespace Controls
         /// <summary>
         ///     Command parameter.
         /// </summary>
-        public object CommandParameter
+        public object? CommandParameter
         {
             get => GetValue(CommandParameterProperty);
             set => SetValue(CommandParameterProperty, value);
@@ -130,7 +130,7 @@ namespace Controls
         /// <summary>
         ///     Label.
         /// </summary>
-        public string Label
+        public string? Label
         {
             get => (string)GetValue(LabelProperty);
             set => SetValue(LabelProperty, value);
@@ -148,7 +148,7 @@ namespace Controls
         /// <summary>
         ///     Symbol.
         /// </summary>
-        public object Symbol
+        public object? Symbol
         {
             get => GetValue(SymbolProperty);
             set => SetValue(SymbolProperty, value);
@@ -157,7 +157,7 @@ namespace Controls
         /// <summary>
         ///     Value.
         /// </summary>
-        public object Value
+        public object? Value
         {
             get => GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
@@ -173,6 +173,9 @@ namespace Controls
         }
 
         /// <inheritdoc />
-        public override string ToString() => Value != null ? base.ToString() + " " + Value : base.ToString();
+        public override string ToString()
+        {
+            return $"{base.ToString()} {Value}";
+        }
     }
 }
