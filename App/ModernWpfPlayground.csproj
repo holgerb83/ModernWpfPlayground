@@ -9,12 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="FastMember" Version="1.5.0" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.2-preview.200831.1" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.2" />
     <PackageReference Include="Prism.DryIoc" Version="8.0.0.1850-pre" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1850-pre" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
-    <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.4.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
