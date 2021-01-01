@@ -14,9 +14,9 @@ namespace ModernWpfPlayground.MvvmStuff
             ObjectAccessor = ObjectAccessor.Create(this);
         }
 
-        private readonly Dictionary<string, object?> _values = new Dictionary<string, object?>();
+        private readonly Dictionary<string, object?> _values = new();
         protected readonly ObjectAccessor ObjectAccessor;
-        private readonly Dictionary<string, object?> _defaultValues = new Dictionary<string, object?>();
+        private readonly Dictionary<string, object?> _defaultValues = new();
 
         protected IReadOnlyDictionary<string, object?> Values => _values;
 
@@ -32,7 +32,7 @@ namespace ModernWpfPlayground.MvvmStuff
             return true;
         }
 
-        protected T GetProperty<T>(T defaultValue = default, [CallerMemberName] string? propertyName = null)
+        protected T? GetProperty<T>(T? defaultValue = default, [CallerMemberName] string? propertyName = null)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
             if (Values.TryGetValue(propertyName, out var obj))

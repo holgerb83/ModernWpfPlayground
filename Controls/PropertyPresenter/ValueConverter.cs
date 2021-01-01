@@ -26,7 +26,7 @@ namespace Controls
                 return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(16, 16));
             }
 
-            if (!(value is string strValue)) return Binding.DoNothing;
+            if (value is not string strValue) return Binding.DoNothing;
             if (strValue.StartsWith(dynResPrefix, StringComparison.Ordinal))
             {
                 var resource = Application.Current.TryFindResource(strValue.Replace(dynResPrefix, string.Empty , StringComparison.InvariantCulture));

@@ -7,9 +7,9 @@ namespace ModernWpfPlayground
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
             "Message", typeof(string), typeof(ContentDialogExample), new PropertyMetadata(default(string)));
 
-        public string Message
+        public string? Message
         {
-            get => (string) GetValue(MessageProperty);
+            get => (string?) GetValue(MessageProperty);
             set => SetValue(MessageProperty, value);
         }
 

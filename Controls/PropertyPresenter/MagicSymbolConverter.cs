@@ -36,11 +36,11 @@ namespace Controls
             var data = value as string;
             if (string.IsNullOrWhiteSpace(data)) return value; //maybe not a string. eventually something else.
 
-            if (data.StartsWith(NoParseKeyword, StringComparison.Ordinal)) return data.Substring(NoParseKeyword.Length);
+            if (data.StartsWith(NoParseKeyword, StringComparison.Ordinal)) return data[NoParseKeyword.Length..];
 
             if (data.StartsWith(PathKeyword, StringComparison.Ordinal))
             {
-                var path = data.Substring(PathKeyword.Length);
+                var path = data[PathKeyword.Length..];
                 var icon = ObjectImageConverter.GetIcon(Geometry.Parse(path), Brushes.Black);
                 return new Image
                 {
@@ -53,7 +53,7 @@ namespace Controls
 
             if (data.StartsWith(DynResKeyword, StringComparison.Ordinal))
             {
-                var resourceKey = data.Substring(DynResKeyword.Length);
+                var resourceKey = data[DynResKeyword.Length..];
                 //get icon from resource dictionary
                 return new Image
                 {

@@ -75,7 +75,7 @@ namespace ModernWpfPlayground
 
         public ICommand ShowDialogCommand { get; }
 
-        public string WelcomeMessage
+        public string? WelcomeMessage
         {
             get => GetProperty("Shadow of the empire");
             set => SetProperty(value);
@@ -137,7 +137,7 @@ namespace ModernWpfPlayground
         private void SaveViewModel()
         {
             var contents = _serializer.Serialize(Values);
-            if (Path == null)
+            if (Path is null)
             {
                 var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
                 var result = saveFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
