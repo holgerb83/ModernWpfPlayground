@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using ModernWpf;
 using ModernWpfPlayground.Types;
-using Prism.Ioc;
 
 namespace ModernWpfPlayground
 {
@@ -15,18 +14,6 @@ namespace ModernWpfPlayground
         {
             base.OnStartup(e);
             ThemeManager.Current.AccentColor = AccentColors.Green.ToWindowsColor();
-        }
-
-
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.Register<MainWindow>();
-            containerRegistry.Register<MainWindowViewModel>();
-        }
-
-        protected override Window CreateShell()
-        {
-            return Container.Resolve<MainWindow>();
         }
     }
 }

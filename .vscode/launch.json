@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/App/bin/Debug/net5.0-windows10.0.18362.0/ModernWpfPlayground.dll",
+            "program": "${workspaceFolder}/App/bin/Debug/net5.0-windows10.0.18362.0/win-x64/ModernWpfPlayground.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console

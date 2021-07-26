@@ -1,166 +1,88 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+﻿using ModernWpfPlayground.Types;
+using MvvmGen;
 using System.Windows;
-using System.Windows.Input;
-using Microsoft.Win32;
-using ModernWpfPlayground.MvvmStuff;
-using ModernWpfPlayground.Types;
-using Prism.Commands;
-using YamlDotNet.Serialization;
 using static ModernWpf.ThemeManager;
 
 namespace ModernWpfPlayground
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class MainWindowViewModel : BaseViewModel
+    [ViewModel]
+    public partial class MainWindowViewModel
     {
         private const string AppName = "TaBEA 3.0.0";
+
+        [Property, PropertyCallMethod(nameof(SetTitle))]
         private string? _path;
-        private string _title = AppName;
-        private readonly ISerializer _serializer;
-        private readonly IDeserializer _deserializer;
 
-        public MainWindowViewModel()
+        [Property] private string _title = AppName;
+
+        [Property, PropertyCallMethod(nameof(BooleanValue_OnChanged))]
+        private bool _booleanValue = true;
+
+        [Property] private Visibility _visibilityEnumTest = Visibility.Visible;
+        [Property] private double _sliderTest = 100;
+        [Property] private double _validationTest;
+        [Property] private string? _welcomeMessage = "Shadow of the empire";
+
+        [Property, PropertyCallMethod(nameof(SetTheme))]
+        private ThemeMode _themeMode = ThemeMode.UseSystemSetting;
+
+        [Property, PropertyCallMethod(nameof(SetAccentColor))]
+        private AccentColors _accentColors = AccentColors.Green;
+
+        [Property] private int _windowWidth = 1200;
+        [Property] private int _windowHeight = 600;
+        [Property] private bool _isPaneOpen = true;
+
+
+        [Command]
+        private void ShowNotification()
         {
-            ShowDialogCommand = new DelegateCommand(ShowDialog);
-            CloseCommand = new DelegateCommand(() => Application.Current.Shutdown());
-            OpenViewModelCommand = new DelegateCommand(LoadViewModel);
-            SaveViewModelCommand = new DelegateCommand(SaveViewModel);
-            ResetViewModelCommand = new DelegateCommand(() =>
-            {
-                ResetViewModel();
-                Path = null;
-            });
-            _serializer = new SerializerBuilder().Build();
-            _deserializer = new DeserializerBuilder().Build();
         }
 
-        private string? Path
+        [Command]
+        private void Close()
         {
-            get => _path;
-            set => SetProperty(ref _path, value,
-                () => Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName);
+            Application.Current.MainWindow?.Close();
         }
 
-        public string Title
+        private void SetTitle()
         {
-            get => _title;
-            set => SetProperty(ref _title, value);
+            Title = Path != null ? $"{System.IO.Path.GetFileName(Path)} - {AppName}" : AppName;
         }
 
-        public bool BooleanValue
-        {
-            get => GetProperty(true);
-            set => SetProperty(value, BooleanValue_OnChanged);
-        }
+        private void SetAccentColor() => Current.AccentColor = AccentColors.ToWindowsColor();
 
-        public Visibility VisibilityEnumTest
-        {
-            get => GetProperty(Visibility.Visible);
-            set => SetProperty(value);
-        }
 
-        public double SliderTest
-        {
-            get => GetProperty(100D);
-            set => SetProperty(value);
-        }
+        private void SetTheme() => Current.ApplicationTheme = ThemeMode.ToApplicationTheme();
 
-        public double ValidationTest
-        {
-            get => GetProperty(0D);
-            set => SetProperty(value);
-        }
-
-        public ICommand ShowDialogCommand { get; }
-
-        public string? WelcomeMessage
-        {
-            get => GetProperty("Shadow of the empire");
-            set => SetProperty(value);
-        }
-
-        public ICommand CloseCommand { get; }
-
-        public ICommand OpenViewModelCommand { get; }
-
-        public ICommand SaveViewModelCommand { get; }
-
-        public ICommand ResetViewModelCommand { get; }
-
-        public ThemeMode ThemeMode
-        {
-            get => GetProperty(ThemeMode.UseSystemSetting);
-            set => SetProperty(value, SetTheme);
-        }
-
-        public AccentColors AccentColors
-        {
-            get => GetProperty(AccentColors.Green);
-            set => SetProperty(value, SetAccentColor);
-        }
-
-        private static void SetAccentColor(AccentColors accentColors) => Current.AccentColor = accentColors.ToWindowsColor();
-
-        public int WindowWidth
-        {
-            get => GetProperty(1200);
-            set => SetProperty(value);
-        }
-
-        public int WindowHeight
-        {
-            get => GetProperty(600);
-            set => SetProperty(value);
-        }
-
-        public bool IsPaneOpen
-        {
-            get => GetProperty(true);
-            set => SetProperty(value);
-        }
-
-        private static void SetTheme(ThemeMode themeMode) => Current.ApplicationTheme = themeMode.ToApplicationTheme();
-
-        private void ShowDialog()
+        [Command]
+        private async void ShowDialog()
         {
             var dialog = new ContentDialogExample {Message = WelcomeMessage};
-            dialog.ShowAsync().Await(completedCallback: x => WelcomeMessage = x.ToString());
+            var result = await dialog.ShowAsync();
+            WelcomeMessage = result.ToString();
         }
 
-        private void BooleanValue_OnChanged(bool obj)
+        private void BooleanValue_OnChanged()
         {
-            VisibilityEnumTest = obj ? Visibility.Visible : Visibility.Collapsed;
+            VisibilityEnumTest = BooleanValue ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        [Command]
         private void SaveViewModel()
         {
-            var contents = _serializer.Serialize(Values);
-            if (Path is null)
-            {
-                var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
-                var result = saveFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
-                if (result != true) return;
-                Path = saveFileDialog.FileName;
-            }
-
-            File.WriteAllText(Path, contents);
+            // var contents = _serializer.Serialize(Values);
+            // if (Path is null)
+            // {
+            //     var saveFileDialog = new SaveFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
+            //     var result = saveFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
+            //     if (result != true) return;
+            //     Path = saveFileDialog.FileName;
+            // }
+            //
+            // File.WriteAllText(Path, contents);
         }
 
-        protected override IEnumerable<(string key, object? value)> GetViewModelItems()
-        {
-            var openFileDialog = new OpenFileDialog {AddExtension = true, DefaultExt = "*.yaml"};
-            var result = openFileDialog.ShowDialog(Application.Current.MainWindow?.Owner);
-            if (result != true) yield break;
-
-            var contents = File.ReadAllText(Path = openFileDialog.FileName);
-
-            var obj = _deserializer.Deserialize<Dictionary<string, object>>(contents);
-            foreach (var (key, value) in obj)
-            {
-                yield return (key, DeserializationExtension.Convert(value, ObjectAccessor[key].GetType()));
-            }
-        }
     }
 }

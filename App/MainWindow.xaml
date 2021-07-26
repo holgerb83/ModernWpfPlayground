@@ -7,20 +7,21 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:ModernWpfPlayground"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     x:Name="Window"
     Title="{Binding Title}"
     Width="{Binding WindowWidth, Mode=TwoWay}"
     Height="{Binding WindowHeight, Mode=TwoWay}"
     d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-    prism:ViewModelLocator.AutoWireViewModel="True"
     ui:ThemeManager.IsThemeAware="True"
     ui:TitleBar.ExtendViewIntoTitleBar="True"
     ui:WindowHelper.UseModernWindowStyle="True"
     TextOptions.TextFormattingMode="Display"
     UseLayoutRounding="True"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <local:PixelsToGridLengthConverter x:Key="PixelsToGridLength" />
     </Window.Resources>
@@ -219,10 +220,8 @@
                 </ui:SplitView.Pane>
                 <!--  Content  -->
                 <TabControl>
-                    <TabItem Header="Bolt">
+                    <TabItem ui:ControlHelper.CornerRadius="0" Header="Bolt">
                         <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
-
-
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
@@ -246,7 +245,10 @@
                             </Grid>
                         </ScrollViewer>
                     </TabItem>
-                    <TabItem Header="General" IsSelected="True">
+                    <TabItem
+                        ui:ControlHelper.CornerRadius="0"
+                        Header="General"
+                        IsSelected="True">
                         <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
 
                             <ui:SimpleStackPanel Margin="5" Spacing="10">
