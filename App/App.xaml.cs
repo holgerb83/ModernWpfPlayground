@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using ModernWpf;
+﻿using ModernWpf;
 using ModernWpfPlayground.Types;
 
 namespace ModernWpfPlayground

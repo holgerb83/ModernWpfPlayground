@@ -86,12 +86,11 @@
                 </CheckBox.Style>
             </CheckBox>
         </DataTemplate>
-        <controls:EnumToKeyValueListConverter x:Key="EnumToKeyValuePairConverter" />
         <DataTemplate x:Key="EnumComboBoxDataTemplate">
             <ComboBox
                 HorizontalAlignment="Stretch"
                 DisplayMemberPath="Key"
-                ItemsSource="{Binding Value, ElementName=LayoutRoot, Converter={StaticResource EnumToKeyValuePairConverter}}"
+                ItemsSource="{Binding Value, ElementName=LayoutRoot, Converter={controls:EnumToItemSourceConverter}}"
                 SelectedValue="{Binding Value, ElementName=LayoutRoot}"
                 SelectedValuePath="Value"
                 Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"

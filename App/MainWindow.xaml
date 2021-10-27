@@ -22,22 +22,10 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Window.Resources>
-        <local:PixelsToGridLengthConverter x:Key="PixelsToGridLength" />
-    </Window.Resources>
     <Window.InputBindings>
-        <KeyBinding
-            Key="O"
-            Command="{Binding OpenViewModelCommand}"
-            Modifiers="Control" />
-        <KeyBinding
-            Key="S"
-            Command="{Binding SaveViewModelCommand}"
-            Modifiers="Control" />
-        <KeyBinding
-            Key="N"
-            Command="{Binding ResetViewModelCommand}"
-            Modifiers="Control" />
+        <KeyBinding Key="O" Modifiers="Control" />
+        <KeyBinding Key="S" Modifiers="Control" />
+        <KeyBinding Key="N" Modifiers="Control" />
     </Window.InputBindings>
 
     <DockPanel>
@@ -58,7 +46,7 @@
             </Grid.Style>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding ElementName=Window, Path=(ui:TitleBar.SystemOverlayLeftInset), Converter={StaticResource PixelsToGridLength}}" />
+                <ColumnDefinition Width="{Binding ElementName=Window, Path=(ui:TitleBar.SystemOverlayLeftInset), Converter={local:PixelsToGridLengthConverter}}" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -220,7 +208,7 @@
                 </ui:SplitView.Pane>
                 <!--  Content  -->
                 <TabControl>
-                    <TabItem ui:ControlHelper.CornerRadius="0" Header="Bolt">
+                    <TabItem Header="Bolt">
                         <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -246,12 +234,15 @@
                         </ScrollViewer>
                     </TabItem>
                     <TabItem
-                        ui:ControlHelper.CornerRadius="0"
                         Header="General"
                         IsSelected="True">
                         <ScrollViewer ui:ScrollViewerHelper.AutoHideScrollBars="True">
-
                             <ui:SimpleStackPanel Margin="5" Spacing="10">
+                                <ComboBox
+                                    DisplayMemberPath="Key"
+                                    ItemsSource="{Binding ThemeMode, Converter={controls:EnumToItemSourceConverter}}"
+                                    SelectedValue="{Binding ThemeMode}"
+                                    SelectedValuePath="Value" />
                                 <controls:PropertyPresenter Label="Theme Mode" Value="{Binding ThemeMode}" />
                                 <controls:PropertyPresenter Label="Accent color" Value="{Binding AccentColors}" />
                                 <controls:PropertyPresenter
@@ -264,10 +255,9 @@
                                     Label="Hallo"
                                     Symbol="x²"
                                     Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
-                                <controls:PropertyPresenter
-                                    Label="Good bye"
-                                    Symbol="x²"
-                                    Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                                <controls:PropertyPresenter Label="Good bye" Symbol="x²">
+                                    <ui:NumberBox SpinButtonPlacementMode="Compact" Value="{Binding ValidationTest, UpdateSourceTrigger=PropertyChanged}" />
+                                </controls:PropertyPresenter>
                                 <Grid Margin="0,5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />

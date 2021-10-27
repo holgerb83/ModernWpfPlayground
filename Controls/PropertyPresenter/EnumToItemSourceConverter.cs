@@ -4,17 +4,20 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace Controls
 {
     /// <summary>
     /// Converts enums to a List with KeyValuePairs.
     /// </summary>
-    public class EnumToKeyValueListConverter : IValueConverter
+    public class EnumToItemSourceConverter : MarkupExtension, IValueConverter
     {
+        private static EnumToItemSourceConverter? _converter;
+
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Enum)) return Binding.DoNothing;
+            if (value is not Enum) return Binding.DoNothing;
             return (from object enumValue in Enum.GetValues(value.GetType())
                     select new KeyValuePair<string, object>(GetDescription(enumValue), enumValue)).ToList();
         }
@@ -40,5 +43,7 @@ namespace Controls
         {
             return Binding.DoNothing;
         }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => _converter ??= new EnumToItemSourceConverter();
     }
 }

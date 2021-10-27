@@ -1,6 +1,4 @@
 ﻿using ModernWpfPlayground.Types;
-using MvvmGen;
-using System.Windows;
 using static ModernWpf.ThemeManager;
 
 namespace ModernWpfPlayground
@@ -59,7 +57,7 @@ namespace ModernWpfPlayground
         [Command]
         private async void ShowDialog()
         {
-            var dialog = new ContentDialogExample {Message = WelcomeMessage};
+            var dialog = new ContentDialogExample { Message = WelcomeMessage };
             var result = await dialog.ShowAsync();
             WelcomeMessage = result.ToString();
         }
@@ -83,6 +81,5 @@ namespace ModernWpfPlayground
             //
             // File.WriteAllText(Path, contents);
         }
-
     }
 }
