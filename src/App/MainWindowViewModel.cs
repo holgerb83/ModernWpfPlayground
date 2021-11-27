@@ -1,4 +1,6 @@
-﻿using ModernWpfPlayground.Types;
+﻿using System.Windows;
+using ModernWpfPlayground.Types;
+using MvvmGen;
 using static ModernWpf.ThemeManager;
 
 namespace ModernWpfPlayground

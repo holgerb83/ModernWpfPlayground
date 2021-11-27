@@ -1,4 +1,6 @@
-﻿namespace ModernWpfPlayground
+﻿using System.Windows;
+
+namespace ModernWpfPlayground
 {
     public partial class ContentDialogExample
     {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using ModernWpf;
 
 namespace ModernWpfPlayground.Types
@@ -21,6 +22,6 @@ namespace ModernWpfPlayground.Types
                 ThemeMode.UseSystemSetting => default,
                 _ => throw new ArgumentOutOfRangeException(nameof(themeMode), themeMode, null)
             };
-        } 
+        }
     }
 }
