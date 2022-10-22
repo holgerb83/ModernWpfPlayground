@@ -1,62 +1,62 @@
 ﻿using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ModernWpfPlayground.Types;
-using MvvmGen;
 using static ModernWpf.ThemeManager;
 
 namespace ModernWpfPlayground
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    [ViewModel]
-    public partial class MainWindowViewModel
+    public partial class MainWindowViewModel : ObservableObject
     {
         private const string AppName = "TaBEA 3.0.0";
 
-        [Property, PropertyCallMethod(nameof(SetTitle))]
-        private string? _path;
+        [ObservableProperty] private string? _path;
+        [ObservableProperty] private string _title = AppName;
+        [ObservableProperty] private bool _booleanValue = true;
+        [ObservableProperty] private Visibility _visibilityEnumTest = Visibility.Visible;
+        [ObservableProperty] private double _sliderTest = 100;
+        [ObservableProperty] private double _validationTest;
+        [ObservableProperty] private string? _welcomeMessage = "Shadow of the empire";
+        [ObservableProperty] private ThemeMode _themeMode = ThemeMode.UseSystemSetting;
+        [ObservableProperty] private AccentColors _accentColors = AccentColors.Green;
+        [ObservableProperty] private int _windowWidth = 1200;
+        [ObservableProperty] private int _windowHeight = 600;
+        [ObservableProperty] private bool _isPaneOpen = true;
 
-        [Property] private string _title = AppName;
+        partial void OnBooleanValueChanged(bool value)
+        {
+            VisibilityEnumTest = value ? Visibility.Visible : Visibility.Collapsed;
+        }
 
-        [Property, PropertyCallMethod(nameof(BooleanValue_OnChanged))]
-        private bool _booleanValue = true;
-
-        [Property] private Visibility _visibilityEnumTest = Visibility.Visible;
-        [Property] private double _sliderTest = 100;
-        [Property] private double _validationTest;
-        [Property] private string? _welcomeMessage = "Shadow of the empire";
-
-        [Property, PropertyCallMethod(nameof(SetTheme))]
-        private ThemeMode _themeMode = ThemeMode.UseSystemSetting;
-
-        [Property, PropertyCallMethod(nameof(SetAccentColor))]
-        private AccentColors _accentColors = AccentColors.Green;
-
-        [Property] private int _windowWidth = 1200;
-        [Property] private int _windowHeight = 600;
-        [Property] private bool _isPaneOpen = true;
+        partial void OnPathChanged(string? value)
+        {
+            Title = value != null ? $"{System.IO.Path.GetFileName(value)} - {AppName}" : AppName;
+        }
 
 
-        [Command]
+        [RelayCommand]
         private void ShowNotification()
         {
         }
 
-        [Command]
+        [RelayCommand]
         private void Close()
         {
             Application.Current.MainWindow?.Close();
         }
 
-        private void SetTitle()
+        partial void OnThemeModeChanged(ThemeMode value)
         {
-            Title = Path != null ? $"{System.IO.Path.GetFileName(Path)} - {AppName}" : AppName;
+            Current.ApplicationTheme = value.ToApplicationTheme();
         }
 
-        private void SetAccentColor() => Current.AccentColor = AccentColors.ToWindowsColor();
+        partial void OnAccentColorsChanged(AccentColors value)
+        {
+            Current.AccentColor = value.ToWindowsColor();
+        }
 
-
-        private void SetTheme() => Current.ApplicationTheme = ThemeMode.ToApplicationTheme();
-
-        [Command]
+        [RelayCommand]
         private async void ShowDialog()
         {
             var dialog = new ContentDialogExample { Message = WelcomeMessage };
@@ -64,12 +64,7 @@ namespace ModernWpfPlayground
             WelcomeMessage = result.ToString();
         }
 
-        private void BooleanValue_OnChanged()
-        {
-            VisibilityEnumTest = BooleanValue ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        [Command]
+        [RelayCommand]
         private void SaveViewModel()
         {
             // var contents = _serializer.Serialize(Values);

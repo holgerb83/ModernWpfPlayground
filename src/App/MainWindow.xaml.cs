@@ -1,4 +1,7 @@
-﻿namespace ModernWpfPlayground
+﻿using System.Windows;
+using System.Windows.Controls.Primitives;
+
+namespace ModernWpfPlayground
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,6 +11,11 @@
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ZoomSlider.Value = 100;
         }
     }
 }

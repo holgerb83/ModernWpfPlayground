@@ -16,29 +16,37 @@
     <ContentControl.Resources>
         <DataTemplate x:Key="DefaultDataTemplate">
             <Grid>
-                <controls:TextBoxEx
-                    x:Name="InputTextBox"
-                    Text="{Binding Value, ElementName=LayoutRoot}"
-                    Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"
-                    Validation.ValidationAdornerSiteFor="{Binding ElementName=LayoutRoot}">
-                    <TextBox.Style>
-                        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type controls:TextBoxEx}">
-                            <Setter Property="IsReadOnly" Value="True" />
-                            <Setter Property="UpdateBindingOnEnter" Value="False" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Command, ElementName=LayoutRoot}" Value="{x:Null}" />
-                                        <Condition Binding="{Binding IsReadOnly, ElementName=LayoutRoot}" Value="False" />
-                                        <Condition Binding="{Binding IsChecked, ElementName=LayoutRoot, TargetNullValue=True}" Value="True" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="IsReadOnly" Value="False" />
-                                    <Setter Property="UpdateBindingOnEnter" Value="True" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </controls:TextBoxEx>
+                <Grid>
+                    <controls:TextBoxEx
+                        x:Name="InputTextBox"
+                        Text="{Binding Value, ElementName=LayoutRoot}"
+                        Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}"
+                        Validation.ValidationAdornerSiteFor="{Binding ElementName=LayoutRoot}">
+                        <TextBox.Style>
+                            <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type controls:TextBoxEx}">
+                                <Setter Property="IsReadOnly" Value="True" />
+                                <Setter Property="UpdateBindingOnEnter" Value="False" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Command, ElementName=LayoutRoot}" Value="{x:Null}" />
+                                            <Condition Binding="{Binding IsReadOnly, ElementName=LayoutRoot}" Value="False" />
+                                            <Condition Binding="{Binding IsChecked, ElementName=LayoutRoot, TargetNullValue=True}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsReadOnly" Value="False" />
+                                        <Setter Property="UpdateBindingOnEnter" Value="True" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </controls:TextBoxEx>
+                    <controls:MagicSymbolControl
+                        x:Name="PartSymbol"
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Symbol="{Binding Symbol, ElementName=LayoutRoot}" />
+                </Grid>
                 <TextBlock
                     Margin="6,0,0,0"
                     Padding="2,2,2,2"
@@ -152,13 +160,6 @@
                 VerticalAlignment="Center"
                 Focusable="False"
                 Text="{Binding Label, ElementName=LayoutRoot}" />
-            <controls:MagicSymbolControl
-                x:Name="PartSymbol"
-                Grid.Column="2"
-                Margin="5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Symbol="{Binding Symbol, ElementName=LayoutRoot}" />
         </Grid>
         <DockPanel Grid.Column="1">
             <Button
