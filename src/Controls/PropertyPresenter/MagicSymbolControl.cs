@@ -2,42 +2,41 @@
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace Controls
+namespace Controls;
+
+/// <summary>
+/// Interaction logic for <see cref="MagicSymbolControl"/>
+/// </summary>
+[ContentProperty(nameof(Symbol))]
+public class MagicSymbolControl : ContentControl
 {
     /// <summary>
-    /// Interaction logic for <see cref="MagicSymbolControl"/>
+    /// Dependency property for <see cref="Symbol"/> property
     /// </summary>
-    [ContentProperty(nameof(Symbol))]
-    public class MagicSymbolControl : ContentControl
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(object), typeof(MagicSymbolControl), new PropertyMetadata(default, PropertyChangedCallback));
+
+    private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        /// <summary>
-        /// Dependency property for <see cref="Symbol"/> property
-        /// </summary>
-        public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(object), typeof(MagicSymbolControl), new PropertyMetadata(default, PropertyChangedCallback));
-
-        private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        if (d is MagicSymbolControl magic)
         {
-            if (d is MagicSymbolControl magic)
-            {
-                magic.Content = MagicSymbolConverter.ConvertToFrameworkElement(e.NewValue);
-            }
+            magic.Content = MagicSymbolConverter.ConvertToFrameworkElement(e.NewValue);
         }
+    }
 
-        /// <summary>
-        /// Symbol to show
-        /// </summary>
-        public object Symbol
-        {
-            get => GetValue(SymbolProperty);
-            set => SetValue(SymbolProperty, value);
-        }
+    /// <summary>
+    /// Symbol to show
+    /// </summary>
+    public object Symbol
+    {
+        get => GetValue(SymbolProperty);
+        set => SetValue(SymbolProperty, value);
+    }
 
-        /// <summary>
-        /// Creates a new instance of <see cref="MagicSymbolControl"/>
-        /// </summary>
-        public MagicSymbolControl()
-        {
-            Focusable = false;
-        }
+    /// <summary>
+    /// Creates a new instance of <see cref="MagicSymbolControl"/>
+    /// </summary>
+    public MagicSymbolControl()
+    {
+        Focusable = false;
     }
 }
