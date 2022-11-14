@@ -25,10 +25,11 @@ public sealed class ObjectImageConverter : IValueConverter
             return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromWidthAndHeight(16, 16));
         }
 
-        if (value is not string strValue) return Binding.DoNothing;
+        if (value is not string strValue)
+            return Binding.DoNothing;
         if (strValue.StartsWith(dynResPrefix, StringComparison.Ordinal))
         {
-            var resource = Application.Current.TryFindResource(strValue.Replace(dynResPrefix, string.Empty , StringComparison.InvariantCulture));
+            var resource = Application.Current.TryFindResource(strValue.Replace(dynResPrefix, string.Empty, StringComparison.InvariantCulture));
             return resource is ImageSource source ? source : Binding.DoNothing;
         }
 
@@ -41,8 +42,7 @@ public sealed class ObjectImageConverter : IValueConverter
         return GetIcon(Geometry.Parse(strValue), null);
     }
 
-    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
-        Binding.DoNothing;
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
 
     /// <summary>
     /// Get icon a ImageSource from geometry.
@@ -68,15 +68,15 @@ public sealed class ObjectImageConverter : IValueConverter
     public static ImageSource DrawText(string text, string strFontFamily, Brush brush)
     {
         var fontFamily = new FontFamily(strFontFamily);
-        var formattedText = new FormattedText(text,
+        var formattedText = new FormattedText(
+            text,
             CultureInfo.GetCultureInfo("en-us"),
             FlowDirection.LeftToRight,
-            new Typeface(
-                fontFamily,
-                FontStyles.Normal,
-                FontWeights.Normal,
-                FontStretches.Normal),
-            64, brush, 1.5);
+            new Typeface(fontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+            64,
+            brush,
+            1.5
+        );
 
         var geometry = formattedText.BuildGeometry(new Point(0, 0));
         return GetIcon(geometry, null);
@@ -90,8 +90,7 @@ public sealed class ObjectImageConverter : IValueConverter
 public class InverseBooleanConverter : IValueConverter
 {
     /// <inheritdoc />
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
-        value is bool b ? !b : throw new InvalidOperationException("The target must be a boolean");
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is bool b ? !b : throw new InvalidOperationException("The target must be a boolean");
 
     /// <inheritdoc />
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;

@@ -25,7 +25,12 @@ public sealed partial class PropertyPresenter
     /// <summary>
     ///     Command Parameter property
     /// </summary>
-    public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(PropertyPresenter), new PropertyMetadata(default(object)));
+    public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+        nameof(CommandParameter),
+        typeof(object),
+        typeof(PropertyPresenter),
+        new PropertyMetadata(default(object))
+    );
 
     /// <summary>
     ///     Command property
@@ -35,7 +40,12 @@ public sealed partial class PropertyPresenter
     /// <summary>
     ///     is checked property.
     /// </summary>
-    public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool?), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(bool?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+    public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(
+        nameof(IsChecked),
+        typeof(bool?),
+        typeof(PropertyPresenter),
+        new FrameworkPropertyMetadata(default(bool?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
+    );
 
     /// <summary>
     ///     Is readonly property
@@ -60,12 +70,22 @@ public sealed partial class PropertyPresenter
     /// <summary>
     ///     Value Property
     /// </summary>
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(object), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+        nameof(Value),
+        typeof(object),
+        typeof(PropertyPresenter),
+        new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
+    );
 
     /// <summary>
     ///     Watermark Property
     /// </summary>
-    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(PropertyPresenter), new FrameworkPropertyMetadata(default(string)));
+    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register(
+        nameof(Watermark),
+        typeof(string),
+        typeof(PropertyPresenter),
+        new FrameworkPropertyMetadata(default(string))
+    );
 
     /// <inheritdoc />
     public PropertyPresenter()

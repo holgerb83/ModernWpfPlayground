@@ -9,7 +9,7 @@ using System.Windows.Media;
 namespace Controls;
 
 /// <summary>
-///     Magically converts a text to 
+///     Magically converts a text to
 /// </summary>
 [ValueConversion(typeof(string), typeof(FrameworkElement))]
 public class MagicSymbolConverter : IValueConverter
@@ -32,9 +32,11 @@ public class MagicSymbolConverter : IValueConverter
     public static object ConvertToFrameworkElement(object value)
     {
         var data = value as string;
-        if (string.IsNullOrWhiteSpace(data)) return value; //maybe not a string. eventually something else.
+        if (string.IsNullOrWhiteSpace(data))
+            return value; //maybe not a string. eventually something else.
 
-        if (data.StartsWith(NoParseKeyword, StringComparison.Ordinal)) return data[NoParseKeyword.Length..];
+        if (data.StartsWith(NoParseKeyword, StringComparison.Ordinal))
+            return data[NoParseKeyword.Length..];
 
         if (data.StartsWith(PathKeyword, StringComparison.Ordinal))
         {
@@ -72,7 +74,7 @@ public class MagicSymbolConverter : IValueConverter
         var block = new TextBlock();
         foreach (var tc in textComponents)
         {
-            var run = new Run(tc.Text) {FontFamily = new FontFamily("Palatino Linotype"), FontSize = 16};
+            var run = new Run(tc.Text) { FontFamily = new FontFamily("Palatino Linotype"), FontSize = 16 };
             switch (tc.Style)
             {
                 case BaselineAlignment.Subscript:
@@ -111,9 +113,7 @@ public class MagicSymbolConverter : IValueConverter
                         snippet.Clear();
                     }
 
-                    alignment = alignment == BaselineAlignment.Subscript
-                        ? BaselineAlignment.Baseline
-                        : BaselineAlignment.Subscript;
+                    alignment = alignment == BaselineAlignment.Subscript ? BaselineAlignment.Baseline : BaselineAlignment.Subscript;
                     break;
                 case '^':
                     if (snippet.Length > 0)
@@ -123,9 +123,7 @@ public class MagicSymbolConverter : IValueConverter
                         snippet.Clear();
                     }
 
-                    alignment = alignment == BaselineAlignment.Superscript
-                        ? BaselineAlignment.Baseline
-                        : BaselineAlignment.Superscript;
+                    alignment = alignment == BaselineAlignment.Superscript ? BaselineAlignment.Baseline : BaselineAlignment.Superscript;
                     break;
                 default:
                     snippet.Append(c);
@@ -144,6 +142,5 @@ public class MagicSymbolConverter : IValueConverter
     }
 
     /// <inheritdoc />
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => Binding.DoNothing;
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
 }

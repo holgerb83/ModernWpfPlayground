@@ -5,9 +5,14 @@ namespace ModernWpfPlayground.Types
 {
     public enum ThemeMode
     {
-        [Description("Light")] Light,
-        [Description("Dark")] Dark,
-        [Description("Use system setting")] UseSystemSetting
+        [Description("Light")]
+        Light,
+
+        [Description("Dark")]
+        Dark,
+
+        [Description("Use system setting")]
+        UseSystemSetting
     }
 
     public static class ThemeModeExtension

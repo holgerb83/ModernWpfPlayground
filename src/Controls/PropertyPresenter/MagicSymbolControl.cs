@@ -13,7 +13,12 @@ public class MagicSymbolControl : ContentControl
     /// <summary>
     /// Dependency property for <see cref="Symbol"/> property
     /// </summary>
-    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(object), typeof(MagicSymbolControl), new PropertyMetadata(default, PropertyChangedCallback));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
+        nameof(Symbol),
+        typeof(object),
+        typeof(MagicSymbolControl),
+        new PropertyMetadata(default, PropertyChangedCallback)
+    );
 
     private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {

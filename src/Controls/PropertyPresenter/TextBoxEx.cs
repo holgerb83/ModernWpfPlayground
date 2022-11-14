@@ -13,28 +13,22 @@ public class TextBoxEx : TextBox
     /// <summary>
     /// Identifies the <see cref="MoveFocusOnEnter"/> dependency property.
     /// </summary>
-    public static readonly DependencyProperty MoveFocusOnEnterProperty =
-        DependencyProperty.Register(
-            nameof(MoveFocusOnEnter), typeof(bool), typeof(TextBoxEx), new UIPropertyMetadata(true));
+    public static readonly DependencyProperty MoveFocusOnEnterProperty = DependencyProperty.Register(nameof(MoveFocusOnEnter), typeof(bool), typeof(TextBoxEx), new UIPropertyMetadata(true));
 
     /// <summary>
     /// Identifies the <see cref="UpdateBindingOnEnter"/> dependency property.
     /// </summary>
-    public static readonly DependencyProperty UpdateBindingOnEnterProperty =
-        DependencyProperty.Register(
-            nameof(UpdateBindingOnEnter), typeof(bool), typeof(TextBoxEx), new UIPropertyMetadata(true));
+    public static readonly DependencyProperty UpdateBindingOnEnterProperty = DependencyProperty.Register(nameof(UpdateBindingOnEnter), typeof(bool), typeof(TextBoxEx), new UIPropertyMetadata(true));
 
     /// <summary>
     /// Identifies the <see cref="ScrollToHomeOnFocus"/> dependency property.
     /// </summary>
-    public static readonly DependencyProperty ScrollToHomeOnFocusProperty =
-        DependencyProperty.Register(nameof(ScrollToHomeOnFocus), typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true));
+    public static readonly DependencyProperty ScrollToHomeOnFocusProperty = DependencyProperty.Register(nameof(ScrollToHomeOnFocus), typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true));
 
     /// <summary>
     /// Identifies the <see cref="SelectAllOnFocus"/> dependency property.
     /// </summary>
-    public static readonly DependencyProperty SelectAllOnFocusProperty =
-        DependencyProperty.Register(nameof(SelectAllOnFocus), typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true));
+    public static readonly DependencyProperty SelectAllOnFocusProperty = DependencyProperty.Register(nameof(SelectAllOnFocus), typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true));
 
     /// <inheritdoc />
     /// <summary>
@@ -75,7 +69,6 @@ public class TextBoxEx : TextBox
     public bool MoveFocusOnEnter
     {
         get => (bool)GetValue(MoveFocusOnEnterProperty);
-
         set => SetValue(MoveFocusOnEnterProperty, value);
     }
 
@@ -85,7 +78,6 @@ public class TextBoxEx : TextBox
     public bool UpdateBindingOnEnter
     {
         get => (bool)GetValue(UpdateBindingOnEnterProperty);
-
         set => SetValue(UpdateBindingOnEnterProperty, value);
     }
 

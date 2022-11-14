@@ -19,7 +19,6 @@ namespace ModernWpfPlayground
             throw new NotImplementedException();
         }
 
-        public override object ProvideValue(IServiceProvider serviceProvider) =>
-            _converter ??= new PixelsToGridLengthConverter();
+        public override object ProvideValue(IServiceProvider serviceProvider) => _converter ??= new PixelsToGridLengthConverter();
     }
 }

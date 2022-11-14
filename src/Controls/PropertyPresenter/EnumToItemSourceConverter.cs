@@ -14,9 +14,9 @@ public class EnumToItemSourceConverter : MarkupExtension, IValueConverter
 
     object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not Enum) return Binding.DoNothing;
-        return (from object enumValue in Enum.GetValues(value.GetType())
-            select new KeyValuePair<string, object>(GetDescription(enumValue), enumValue)).ToList();
+        if (value is not Enum)
+            return Binding.DoNothing;
+        return (from object enumValue in Enum.GetValues(value.GetType()) select new KeyValuePair<string, object>(GetDescription(enumValue), enumValue)).ToList();
     }
 
     /// <summary>
@@ -26,12 +26,9 @@ public class EnumToItemSourceConverter : MarkupExtension, IValueConverter
     /// <returns></returns>
     private static string GetDescription(object value)
     {
-        if (value is not Enum enumValue) return string.Empty;
-        var descriptionAttribute = enumValue.GetType()
-            .GetField(enumValue.ToString())?
-            .GetCustomAttributes(false)
-            .OfType<DescriptionAttribute>()
-            .FirstOrDefault();
+        if (value is not Enum enumValue)
+            return string.Empty;
+        var descriptionAttribute = enumValue.GetType().GetField(enumValue.ToString())?.GetCustomAttributes(false).OfType<DescriptionAttribute>().FirstOrDefault();
 
         return descriptionAttribute?.Description ?? value.ToString() ?? string.Empty;
     }
